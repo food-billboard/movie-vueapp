@@ -7,27 +7,42 @@ export default {
     },
     meta: [
       { charset: 'utf-8' },
-      { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+      { name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0, viewport-fit=cover' },
       { hid: 'description', name: 'description', content: '' },
       { name: 'format-detection', content: 'telephone=no' }
     ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' }
+    ],
+    script: [
+
     ]
   },
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
-    'vant/lib/index.css'
+    'vant/lib/index.css',
+    '@/assets/global.less'
   ],
+
+  styleResources: {
+    less: [
+      './assets/variable.less'
+    ]
+  },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
-    '@/plugins/vant'
+    {
+      src: "@/plugins/lib-flexible",
+      ssr: false 
+    },
+    '@/plugins/axios',
+    '@/plugins/components',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  // components: true,
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -41,6 +56,7 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
+    'cookie-universal-nuxt'
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -48,5 +64,40 @@ export default {
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
+    postcss: {
+      plugins: {
+        "postcss-pxtorem": {
+          rootValue: 37.5,
+          remPrecision: 2,
+          propsList: ["*"],
+          // exclude: /node_modules|vant/i
+        }
+      },
+      preset: {
+        autoprefixer: true 
+      }
+    },
+    babel: {
+      plugins: [
+        [
+          'import',
+          {
+            libraryName: 'vant',
+            style: false
+          },
+          'vant'
+        ]
+      ]
+    }
+  },
+  server: {
+    port: 8000,
+    host: '127.0.0.1'
+  },
+  env: {
+    baseUrl: process.env.NODE_ENV === 'production' ? 'http://127.0.0.1:4000' : 'http://127.0.0.1:4000'
+  },
+  router: {
+    middleware: ['auth']
   }
 }
