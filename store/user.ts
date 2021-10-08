@@ -2,10 +2,15 @@
 
 export const state = () => {
   return {
-    
+    userInfo: null 
   }
 }
 
 export const mutations = {
-  
+  logout(state: any) {
+    state.user.userInfo = null 
+  },
+  login() {
+    
+  }
 }

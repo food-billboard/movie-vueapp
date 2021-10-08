@@ -1,5 +1,5 @@
 export default function (context: any) {
-  const { app, store } = context
+  const { app, store, redirect } = context
   const cookiesToken = app.$cookies.get('token')
   if (cookiesToken) {
     // 每次跳转路由 验证登录状态是否过期
@@ -17,6 +17,10 @@ export default function (context: any) {
           }
         }
       }
+    })
+  }else {
+    redirect({
+      path: "login"
     })
   }
 }

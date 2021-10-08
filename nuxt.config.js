@@ -37,6 +37,7 @@ export default {
       src: "@/plugins/lib-flexible",
       ssr: false 
     },
+    "@/plugins/services",
     '@/plugins/axios',
     '@/plugins/components',
   ],
