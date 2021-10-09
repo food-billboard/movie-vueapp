@@ -33,6 +33,7 @@ const formatQuery = (query: any ={})=>{
 
 interface RequestOptions extends AxiosRequestConfig{
   mis?: boolean
+  origin?: boolean 
 }
 
 export const request = (context: Context) => async <ResBody>(url: string, setting: RequestOptions = {} as RequestOptions)=>{
@@ -40,7 +41,7 @@ export const request = (context: Context) => async <ResBody>(url: string, settin
   const { app: { $axios } } = context 
 
   // 过滤URL参数
-  const { params, mis=true, ...options } = setting
+  const { params, mis=true, origin, withCredentials=true, ...options } = setting
 
   let body: any
   let error: any
@@ -48,6 +49,7 @@ export const request = (context: Context) => async <ResBody>(url: string, settin
   try{
     body = await $axios.request({
       url,
+      withCredentials,
       // requestType: 'json',
       ...options,
       ...(params ? { params: formatQuery(params) } : {}),
@@ -74,7 +76,7 @@ export const request = (context: Context) => async <ResBody>(url: string, settin
 
   // 返回真正的response body res 内容
   if( !error ){
-    return (body?.res?.data || {}) as ResBody
+    return (origin ? body : body?.res?.data || {}) as ResBody
   }
   error.mis = mis
   mis && misManage(error, context);
@@ -83,7 +85,7 @@ export const request = (context: Context) => async <ResBody>(url: string, settin
 
 // 未登录的多次触发处理
 const dispathLogin = debounce(function(_, context: Context) {
-  const { app, redirect, store } = context 
+  const { app, redirect } = context 
 
   redirect({
     path: "login",
@@ -92,7 +94,6 @@ const dispathLogin = debounce(function(_, context: Context) {
     }
   })
   app.$API_USER.logout() 
-  store.commit("user/logout")
 }, 1000, {'leading': true, 'trailing': false} )
 
 // 处理报错

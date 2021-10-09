@@ -20,6 +20,7 @@
   "dependencies": {
     "@nuxtjs/axios": "^5.13.6",
     "amfe-flexible": "^2.2.1",
+    "chunk-file-upload": "^1.0.8",
     "cookie-universal-nuxt": "^2.1.5",
     "core-js": "^3.15.1",
     "lodash": "^4.17.21",
@@ -34,6 +35,7 @@
     "@nuxt/typescript-build": "^2.1.0",
     "@nuxtjs/eslint-config-typescript": "^6.0.1",
     "@nuxtjs/eslint-module": "^3.0.2",
+    "@nuxtjs/proxy": "^2.1.0",
     "@nuxtjs/style-resources": "^1.2.1",
     "@nuxtjs/stylelint-module": "^4.0.0",
     "@types/lodash": "^4.14.175",

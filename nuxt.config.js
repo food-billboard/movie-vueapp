@@ -40,6 +40,10 @@ export default {
     "@/plugins/services",
     '@/plugins/axios',
     '@/plugins/components',
+    {
+      src: "@/plugins/upload",
+      ssr: false 
+    }
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -57,11 +61,23 @@ export default {
   modules: [
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
-    'cookie-universal-nuxt'
+    'cookie-universal-nuxt',
+    "@nuxtjs/proxy"
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
-  axios: {},
+  axios: {
+    proxy: true,
+    prefix: '/',
+    credentials: true
+  },
+
+  proxy:  {
+    '/api': {
+      target: process.env.NODE_ENV === 'production' ? 'http://127.0.0.1:4000' : 'http://127.0.0.1:5000',
+      changeOrigin: true, // 表示是否跨域
+    }
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
