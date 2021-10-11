@@ -14,11 +14,13 @@ const UserServePlugin: Plugin = (context, inject) => {
       store.commit("user/logout")
       return request("/api/user/logon/signout")
     },
-    login(data: API_USER.IPostLoginParams) {
-      return request("/api/user/logon/account", {
+    async login(data: API_USER.IPostLoginParams) {
+      const result = await request("/api/user/logon/account", {
         method: "POST",
         data
       })
+      store.commit("user/fetchUserInfo", result || {})
+      return result 
     },
     register(data: API_USER.IPostRegisterParams) {
       return request("/api/user/logon/register", {

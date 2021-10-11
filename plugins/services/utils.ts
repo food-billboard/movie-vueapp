@@ -76,7 +76,7 @@ export const request = (context: Context) => async <ResBody>(url: string, settin
 
   // 返回真正的response body res 内容
   if( !error ){
-    return (origin ? body : body?.res?.data || {}) as ResBody
+    return (origin ? body : body?.data?.res?.data || {}) as ResBody
   }
   error.mis = mis
   mis && misManage(error, context);

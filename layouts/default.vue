@@ -1,9 +1,13 @@
 <template>
-  <div style="background-color: #f4f4f4;min-height: 100vh;">
-    <top-bar></top-bar>
+  <div id="movie-wrapper">
     <main class="main">
       <nuxt />
     </main>
-    <back-top></back-top>
   </div>
 </template>
+<style scoped>
+#movie-wrapper {
+  background-color: #f4f4f4;
+  min-height: 100vh;
+}
+</style>

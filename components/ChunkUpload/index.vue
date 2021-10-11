@@ -1,22 +1,29 @@
 <template>
   <van-uploader 
-    v-model="value"
+    v-model="stateValue"
     :accept="accept"
     :preview-size="previewSize"
-    :before-read="beforeRead" 
     :multiple="multiple"
     :disabled="disabled"
     :readonly="readonly"
     :max-size="maxSize"
     :max-count="maxCount"
     :upload-icon="uploadIcon"
+    :after-read="afterRead"
     result-type="file"
   />
 </template>
 <script>
-import { upload } from './upload'
+import { upload, formatDefaultValue } from './upload'
+
 export default {
   props: {
+    defaultValue: {
+      type: [ Array, Object, String ],
+      default() {
+        return []
+      }
+    },
     accept: {
       type: String,
       default: "image/*"
@@ -50,27 +57,32 @@ export default {
   data() {
     return {
       uploadInstance: null,
-      value: []
+      stateValue: formatDefaultValue(this.defaultValue || [])
     };
+  },
+  watch: {
+    stateValue() {
+      this.$emit("change", this.stateValue)
+    }
   },
   created() {
     if(this.$ChunkUpload) this.uploadInstance = new this.$ChunkUpload()
   },
   methods: {
-    beforeRead(file) {
+    afterRead(wrapperFile) {
+      const { file } = wrapperFile
       upload.call(this, this.uploadInstance, file, (newTargetFile) => {
-        const index = this.value.findIndex(item => item.file === file)
+        const index = this.stateValue.findIndex(item => item.file === file)
         if(~index) {
-          const prevValue = this.value 
+          const prevValue = this.stateValue 
           const prev = prevValue[index]
           prevValue.splice(index, 1, {
             ...prev,
             ...newTargetFile
           })
         }
-      })
-      return true 
-    },
+      }, this.stateValue)
+    }
   },
 };
 </script>

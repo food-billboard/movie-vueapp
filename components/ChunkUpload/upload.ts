@@ -2,7 +2,7 @@ import { Upload } from 'chunk-file-upload'
 
 const MAX_UPLOAD_FILE_SIZE = 1024 * 1024 * 5 
 
-function exitDataFn(method: Function) {
+function exitDataFn(method: Function, onResponse: Function) {
 
   return async function(params: {
     filename: string
@@ -21,51 +21,45 @@ function exitDataFn(method: Function) {
       size,
       name: md5
     })
+    onResponse(data)
     return data 
   }
 
 }
 
-function uploadFn (instance: Upload, method: Function) {
-  return async function(data: any, name: Symbol) {
-    const task = instance.getTask(name)
-    const size = (task!.file.file as File).size 
+function uploadFn (method: Function) {
+  return async function(data: any) {
     let response: any = {}
     const md5 = data.get('md5')
     const file = data.get('file')
     const index = data.get("index") as any 
-    try {
-      response = await method({
-        md5: md5 as string,
-        file: file as Blob,
-        offset: (index as number) * MAX_UPLOAD_FILE_SIZE
-      })
-    }catch(err) {
-      
-    }
-    const nextOffset = response["upload-offset"] ?? response["Upload-Offset"]
-    if(nextOffset >= size) return {
-      data: size
-    }
-    return {
-      data: nextOffset >= size ? size : nextOffset
-    }
+    response = await method({
+      md5: md5 as string,
+      file: file as Blob,
+      offset: (index as number) * MAX_UPLOAD_FILE_SIZE
+    })
+    return response
   }
 }
 
-function beforeDelete(instance: Upload, name: Symbol) {
+function beforeDelete(instance: Upload, name: Symbol, fileList: any) {
   return function() {
+    const target = fileList.find((item: any) => item.task.symbol === name)
     if(name) {
       instance.cancel(name)
+    }
+    if(target && target.url) {
+      URL.revokeObjectURL(target.url)
     }
     return true 
   }
 }
 
-export function upload(instance: Upload, file: File, onChange: Function) {
+export function upload(instance: Upload, file: File, onChange: Function, fileList: any[]) {
   const config: any = {
     status: "uploading",
     message: "上传中",
+    url: isImage(file) ? URL.createObjectURL(file) : undefined
   }
 
   // @ts-ignore
@@ -78,8 +72,11 @@ export function upload(instance: Upload, file: File, onChange: Function) {
       file
     },
     request: {
-      exitDataFn: exitDataFn(exitFnRequest),
-      uploadFn: uploadFn(instance, uploadFile),
+      exitDataFn: exitDataFn(exitFnRequest, function(data: any) {
+        config._id = data._id 
+        onChange(config)
+      }),
+      uploadFn: uploadFn(uploadFile),
       callback(err) {
         if(err) {
           config.status = "failed"
@@ -88,10 +85,11 @@ export function upload(instance: Upload, file: File, onChange: Function) {
           config.status = "done"
           config.message = "上传成功"
         }
+        onChange(config)
       }
     },
   })
-  config.beforeDelete = beforeDelete(instance, name)
+  config.beforeDelete = beforeDelete(instance, name, fileList)
 
   if(!name) {
     config.status = "failed"
@@ -104,4 +102,20 @@ export function upload(instance: Upload, file: File, onChange: Function) {
 
   onChange(config)
   
+}
+
+function isImage(file: File) {
+  return file.type.startsWith("image")
+}
+
+export function formatDefaultValue(value: string | string[] | object[] | object) {
+  const formatValue = Array.isArray(value) ? value : [value]
+  return formatValue.map((item) => {
+    if(typeof item === "string") {
+      return {
+        _id: item 
+      }
+    }
+    return item 
+  })
 }

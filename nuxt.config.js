@@ -38,7 +38,7 @@ export default {
       ssr: false 
     },
     "@/plugins/services",
-    '@/plugins/axios',
+    // '@/plugins/axios',
     '@/plugins/components',
     {
       src: "@/plugins/upload",
@@ -62,19 +62,21 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     'cookie-universal-nuxt',
-    "@nuxtjs/proxy"
+    // "@nuxtjs/proxy"
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
     proxy: true,
     prefix: '/',
-    credentials: true
+    withCredentials: true,
+    timeout: 30000,
+    baseURL: process.env.baseUrl,
   },
 
   proxy:  {
     '/api': {
-      target: process.env.NODE_ENV === 'production' ? 'http://127.0.0.1:4000' : 'http://127.0.0.1:5000',
+      target: process.env.NODE_ENV === 'production' ? 'http://127.0.0.1:4000' : 'http://127.0.0.1:4000',
       changeOrigin: true, // 表示是否跨域
     }
   },

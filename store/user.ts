@@ -8,9 +8,9 @@ export const state = () => {
 
 export const mutations = {
   logout(state: any) {
-    state.user.userInfo = null 
+    state.userInfo = null 
   },
-  login() {
-    
+  fetchUserInfo(state: any, payload: any) {
+    state.userInfo = payload
   }
 }
