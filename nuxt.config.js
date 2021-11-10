@@ -1,3 +1,7 @@
+import path from 'path'
+
+const resolve = (dir) => path.join(__dirname, dir)
+
 export default {
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
@@ -96,18 +100,33 @@ export default {
         autoprefixer: true 
       }
     },
+    transpile: [ /vant.*?less/ ], 
     babel: {
       plugins: [
         [
           'import',
           {
             libraryName: 'vant',
-            style: false
+            "style": (name) => {
+              return `${name}/style/less.js`
+            }
           },
           'vant'
         ]
       ]
-    }
+    },
+    loaders: {
+      less: {
+        lessOptions: {
+          javascriptEnabled: true,
+          modifyVars: {
+            hack: `true; @import "${resolve(
+              "./assets/variable.less"
+            )}";`
+          }
+        }
+      },
+    },
   },
   server: {
     port: 8000,

@@ -1,10 +1,11 @@
 import { Plugin } from '@nuxt/types'
+import { withTry } from '../../utils/tool'
+import { redirectPage } from '../../middleware/auth'
 import { request as requestWrapper } from './utils'
 
 const UserServePlugin: Plugin = (context, inject) => {
   const request = requestWrapper(context)
   const { store } = context 
-  // const cookiesUtils: any = app.$cookies 
 
   inject("API_USER", {
     getNotice() {
@@ -12,7 +13,10 @@ const UserServePlugin: Plugin = (context, inject) => {
     },
     logout() {
       store.commit("user/logout")
-      return request("/api/user/logon/signout")
+      redirectPage(context, true)
+      return request("/api/user/logon/signout", {
+        method: "POST"
+      })
     },
     async login(data: API_USER.IPostLoginParams) {
       const result = await request("/api/user/logon/account", {
@@ -20,13 +24,19 @@ const UserServePlugin: Plugin = (context, inject) => {
         data
       })
       store.commit("user/fetchUserInfo", result || {})
+      redirectPage(context)
       return result 
     },
-    register(data: API_USER.IPostRegisterParams) {
-      return request("/api/user/logon/register", {
+    async register(data: API_USER.IPostRegisterParams) {
+      const [ err, value ] = await withTry(request)("/api/user/logon/register", {
         method: "POST",
         data
       })
+      if(value) { 
+        redirectPage(context)
+        return value 
+      }
+      return Promise.reject(err)
     },
     forget(data: API_USER.IPutForgetParams) {
       return request("/api/user/logon/forget", {
