@@ -26,9 +26,9 @@ export default {
   //   console.log(this)
   //   // 生命周期可以返回一个 Boolean，为真则进入路由，为假则停止渲染当前页面并显示错误页面 || Promise
   // },
-  // // watchQuery() {
-  // //   //监听参数字符串更改并在更改时执行组件方法 (asyncData, fetch, validate, layout, ...)
-  // // },
+  // watchQuery() {
+  //   //监听参数字符串更改并在更改时执行组件方法 (asyncData, fetch, validate, layout, ...)
+  // },
   // head() {
   //   // Nuxt.js 使用了 vue-meta 更新应用的 头部标签(Head) 和 html 属性。
   // },

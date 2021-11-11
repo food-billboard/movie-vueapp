@@ -11,6 +11,9 @@ const UserServePlugin: Plugin = (context, inject) => {
     getNotice() {
       return request("/api/user/home/notice")
     },
+    getSwiper() {
+      return request("/api/user/home/swiper")
+    },
     logout() {
       store.commit("user/logout")
       redirectPage(context, true)

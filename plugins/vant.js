@@ -1,4 +1,4 @@
-import { Button, Uploader, Form, PasswordInput, Loading, Field } from 'vant'
+import { Button, Uploader, Form, PasswordInput, Loading, Field, Search } from 'vant'
 
 export default {
   install(Vue) {
@@ -8,5 +8,6 @@ export default {
     Vue.use(PasswordInput)
     Vue.use(Loading)
     Vue.use(Field)
+    Vue.use(Search)
   }
 }
