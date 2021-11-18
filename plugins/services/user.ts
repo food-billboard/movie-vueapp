@@ -8,11 +8,25 @@ const UserServePlugin: Plugin = (context, inject) => {
   const { store } = context 
 
   inject("API_USER", {
+    // 跑马灯
     getNotice() {
       return request("/api/user/home/notice")
     },
+    // 轮播图
     getSwiper() {
       return request("/api/user/home/swiper")
+    },
+    // 首页分类grid
+    getClassifyIconList(params: API_USER.IGetHomeClassifyList) {
+      return request("/api/user/movie/classify/specDropList", {
+        params
+      })
+    },
+    // 首页每日上新  
+    getDaily(params: API_USER.IGetHomeDailyList) {
+      return request("/api/user/home/daily", {
+        params
+      })
     },
     logout() {
       store.commit("user/logout")
@@ -24,7 +38,10 @@ const UserServePlugin: Plugin = (context, inject) => {
     async login(data: API_USER.IPostLoginParams) {
       const result = await request("/api/user/logon/account", {
         method: "POST",
-        data
+        data: {
+          ...data,
+          env: process.env.NODE_ENV === "production" ? "prod" : "dev"
+        }
       })
       store.commit("user/fetchUserInfo", result || {})
       redirectPage(context)

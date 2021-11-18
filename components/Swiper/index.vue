@@ -40,6 +40,7 @@
           loop: true,
           loopedSlides: 5,
           spaceBetween: 10,
+          autoplay: true
         },
         swiperOptionThumbs: {
           loop: true,
@@ -48,7 +49,7 @@
           centeredSlides: true,
           slidesPerView: 'auto',
           touchRatio: 0.2,
-          slideToClickedSlide: true
+          slideToClickedSlide: true,
         },
       }
     },
