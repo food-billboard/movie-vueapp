@@ -28,6 +28,12 @@ const UserServePlugin: Plugin = (context, inject) => {
         params
       })
     },
+    // 首页排行榜列表
+    getHomeRankList(params: API_USER.IGetHomeDailyList) {
+      return request("/api/user/home/rank", {
+        params 
+      })
+    },
     logout() {
       store.commit("user/logout")
       redirectPage(context, true)

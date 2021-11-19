@@ -15,14 +15,18 @@
       :value="classify"
     />
     <daily
-      style="margin-top: 16px"
+      style="margin: 16px 0"
       :value="daily"
+    />
+    <rank
+      :value="rank"
     />
   </div>
 </template>
 <script>
 import ClassifyList from './components/classify'
 import Daily from './components/daily'
+import Rank from './components/rank'
 import CustomSwiper from '@/components/Swiper'
 import Search from '@/components/Search'
 export default {
@@ -30,13 +34,15 @@ export default {
     CustomSwiper,
     Search,
     ClassifyList,
-    Daily
+    Daily,
+    Rank
   },
   async asyncData({ app }) {
     const swiperData = await app.$API_USER.getSwiper()
     const noticeData = await app.$API_USER.getNotice()
     const classify = await app.$API_USER.getClassifyIconList({ count: 16 })
     const daily = await app.$API_USER.getDaily({ count: 16 })
+    const rank = await app.$API_USER.getHomeRankList({ count: 16 })
 
     // 返回内容会被保存data
     return {
@@ -58,7 +64,8 @@ export default {
       }),
       notice: noticeData?.notice || "",
       classify,
-      daily
+      daily,
+      rank
     }
   },
   data() {
@@ -66,15 +73,25 @@ export default {
       swiperList: [],
       notice: "",
       classify: [],
-      daily: []
+      daily: [],
+      rank: []
     }
   },
   methods: {
     handleClickSwiper(target) {
-      console.log("点击了轮播图", target)
+      const { type, id } = target
+      const path = type === "special" ? "/special" : "/detail" 
+      this.$router.push({
+        path,
+        query: {
+          id
+        }
+      })
     },
     handleSearch() {
-      console.log("跳转去搜索页面")
+      this.$router.push({
+        path: "/search"
+      })
     }
   }
 }

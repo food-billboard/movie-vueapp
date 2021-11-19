@@ -31,7 +31,8 @@ import {
   Row,
   Image,
   Icon,
-  GridItem
+  GridItem,
+  Empty
 } from 'vant'
 
 export default {
@@ -69,5 +70,6 @@ export default {
     Vue.use(PullRefresh)
     Vue.use(Overlay)
     Vue.use(GridItem)
+    Vue.use(Empty)
   }
 }

@@ -39,7 +39,6 @@
           slidesPerView: 4,
           spaceBetween: 10,
           slidesPerGroup: 4,
-          loop: true,
           loopFillGroupWithBlank: true,
         },
       }
@@ -60,11 +59,7 @@
 <style lang="less" scoped>
 @import url("/assets/global.less");
 .daily-title {
-  font-size: @title-font-size;
-  font-weight: bold;
-  text-shadow: 0 0 5px @normal-background;
-  display: inline-block;
-  line-height: 1.8;
+  &:extend(.normal-title);
 }
 .daily-swiper {
   height: 25vw;
