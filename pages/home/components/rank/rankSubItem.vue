@@ -4,15 +4,19 @@
     :class="[{ 'rank-sub-item-active': !!value }, 'rank-sub-item']"
     :style="{backgroundImage: value ? `url(${value.poster})` : 'unset'}"
   >
-  <van-tag
-    v-if="!!value"
-    type="primary"
-    round
-    plain
-    class="rank-sub-item-title"
-  >
-    {{value.name}}
-  </van-tag>
+    <nuxt-link
+      v-if="!!value"
+      :to="`/detail?id=${value ? value._id : ''}`"
+    >
+      <van-tag
+        type="primary"
+        round
+        plain
+        class="rank-sub-item-title"
+      >
+        {{value.name}}
+      </van-tag>
+    </nuxt-link>
   </div>
 </template>
 <script>

@@ -2,9 +2,12 @@
   <div>
     <div 
       class="rank-item-title normal-title"
-      @click="handleGetDetail"
     >
-      {{value.name}}
+      <nuxt-link
+        :to="`/rank?id=${value._id}`"
+      >
+        {{value.name}}
+      </nuxt-link>
     </div>
     <div
       v-if="!!value.match.length"
@@ -23,7 +26,6 @@
           >
             <rank-sub-item
               :value="item"
-              @click="handleClick(item)"
             />
           </div>
           <div
@@ -35,7 +37,6 @@
               :key="matchItem._id"
               :value="matchItem"
               class="rank-item-sub-wrapper-content"
-              @click="handleClick(matchItem)"
             />
           </div>
         </div>
@@ -78,25 +79,6 @@ export default {
       }
     }
   },
-  methods: {
-    handleClick(target: any) {
-      const { _id } = target
-      this.$router.push({
-        path: "/detail",
-        query: {
-          id: _id
-        }
-      }) 
-    },
-    handleGetDetail() {
-      this.$router.push({
-        path: "/rank",
-        query: {
-          id: this.value._id
-        }
-      })
-    }
-  }
 }
 </script>
 <style lang="less" scoped>

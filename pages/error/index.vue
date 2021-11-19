@@ -43,7 +43,7 @@ export default {
   },
   head () {
     return {
-      title: `${this.statusCode === 404 ? '找不到页面' : '呈现页面出错'} - 掘金`,
+      title: `${this.statusCode === 404 ? '找不到页面' : '呈现页面出错'}`,
       meta: [
         {
           name: 'viewport',

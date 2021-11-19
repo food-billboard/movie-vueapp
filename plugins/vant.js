@@ -32,7 +32,8 @@ import {
   Image,
   Icon,
   GridItem,
-  Empty
+  Empty,
+  TabbarItem,
 } from 'vant'
 
 export default {
@@ -71,5 +72,6 @@ export default {
     Vue.use(Overlay)
     Vue.use(GridItem)
     Vue.use(Empty)
+    Vue.use(TabbarItem)
   }
 }

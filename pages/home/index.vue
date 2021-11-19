@@ -37,6 +37,7 @@ export default {
     Daily,
     Rank
   },
+  layout: "homeLayout",
   async asyncData({ app }) {
     const swiperData = await app.$API_USER.getSwiper()
     const noticeData = await app.$API_USER.getNotice()
