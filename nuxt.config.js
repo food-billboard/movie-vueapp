@@ -26,7 +26,7 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     'vant/lib/index.css',
-    '@/assets/global.less'
+    '@/assets/global.less',
   ],
 
   styleResources: {
@@ -47,7 +47,8 @@ export default {
     {
       src: "@/plugins/upload",
       ssr: false 
-    }
+    },
+    '@/plugins/swiper'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -80,7 +81,7 @@ export default {
 
   proxy:  {
     '/api': {
-      target: process.env.NODE_ENV === 'production' ? 'http://127.0.0.1:4000' : 'http://127.0.0.1:4000',
+      target: process.env.NODE_ENV === 'production' ? 'http://127.0.0.1:4000' : 'http://47.97.27.23',
       changeOrigin: true, // 表示是否跨域
     }
   },
@@ -133,7 +134,7 @@ export default {
     host: '127.0.0.1'
   },
   env: {
-    baseUrl: process.env.NODE_ENV === 'production' ? 'http://127.0.0.1:4000' : 'http://127.0.0.1:4000'
+    baseUrl: process.env.NODE_ENV === 'production' ? 'http://127.0.0.1:4000' : 'http://47.97.27.23'
   },
   router: {
     middleware: ['auth']

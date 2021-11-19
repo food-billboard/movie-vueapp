@@ -1,5 +1,13 @@
 declare namespace API_USER {
 
+  export interface IGetHomeClassifyList {
+    count?: number 
+  }
+
+  export interface IGetHomeDailyList {
+    count?: number 
+  }
+
   export interface IPostLoginParams {
     mobile: string | number 
     password: string 
