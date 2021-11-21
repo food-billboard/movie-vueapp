@@ -75,6 +75,21 @@ const UserServePlugin: Plugin = (context, inject) => {
         method: "POST",
         data
       })
+    },
+
+    // 分类名称列表
+    getClassifyNameList(params: API_USER.IGetHomeClassifyList) {
+      return request("/api/user/movie/classify/specDropList", {
+        method: "GET",
+        params
+      })
+    },
+    // 分类列表
+    getClassifyList(params: API_USER.IGetClassifyListParams) {
+      return request("/api/user/movie/classify", {
+        method: "GET",
+        params
+      })
     }
   })
 }

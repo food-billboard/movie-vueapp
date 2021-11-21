@@ -4,6 +4,29 @@ declare namespace API_USER {
     count?: number 
   }
 
+  export interface IGetClassifyListParams {
+    _id: string 
+    currPage?: number 
+    pageSize?: number 
+  }
+
+  export interface IGetClassifyNameListData {
+    name: string 
+    poster: string 
+    _id: string 
+    key: string 
+  }
+
+  export interface IGetClassifyListData {
+    hot: number 
+    images: string[]
+    classify: { name: string }[]
+    publish_time: string 
+    name: string 
+    poster: string 
+    _id: string 
+  }
+
   export interface IGetHomeDailyList {
     count?: number 
   }
