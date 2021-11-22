@@ -35,7 +35,9 @@ import {
   Empty,
   TabbarItem,
   SwipeItem,
-  Swipe
+  Swipe,
+  Cell,
+  CellGroup
 } from 'vant'
 
 export default {
@@ -77,5 +79,7 @@ export default {
     Vue.use(TabbarItem)
     Vue.use(SwipeItem)
     Vue.use(Swipe)
+    Vue.use(Cell)
+    Vue.use(CellGroup)
   }
 }

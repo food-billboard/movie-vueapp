@@ -1,5 +1,5 @@
 <template>
-  <div>rank</div>
+  <div>设置</div>
 </template>
 <script>
 export default {
