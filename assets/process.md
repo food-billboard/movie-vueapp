@@ -1,6 +1,13 @@
 
 # 完成度情况统计  
 
+## 公共组件  
+
+1. 卡片形式电影列表 `/components/CardMovie`  
+2. 列表形式电影列表 `/components/ListMovie`  
+3. 懒加载列表  `/components/List`  
+4. 文件上传  `/components/ChunkUpload`  
+
 ## 首页 
 - 路由  
 /home 
@@ -11,3 +18,17 @@
 3. 每日上新 ✅  
 4. 分类✅  
 5. 排行榜✅  
+
+## 登录  
+- 登录   
+/login 
+- 是否完成: 是  
+
+## 分类  
+- 分类  
+/classify  
+- 是否完成: 是  
+- 内容  
+1. 卡片形式电影列表  ✅
+2. 列表形式电影列表  ✅
+3. 懒加载列表组件  ✅
