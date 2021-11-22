@@ -34,6 +34,8 @@ import {
   GridItem,
   Empty,
   TabbarItem,
+  SwipeItem,
+  Swipe
 } from 'vant'
 
 export default {
@@ -73,5 +75,7 @@ export default {
     Vue.use(GridItem)
     Vue.use(Empty)
     Vue.use(TabbarItem)
+    Vue.use(SwipeItem)
+    Vue.use(Swipe)
   }
 }

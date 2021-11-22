@@ -89,6 +89,7 @@ export default {
     display: inline-block;
     line-height: 2;
     text-align: center;
+    font-size: @title-font-size;
   }
   .classify-item-active {
     color: @active-text-color;

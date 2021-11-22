@@ -2,7 +2,7 @@
 
 export const state = () => {
   return {
-    userInfo: null 
+    userInfo: null,
   }
 }
 

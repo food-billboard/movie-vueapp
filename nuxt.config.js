@@ -48,7 +48,8 @@ export default {
       src: "@/plugins/upload",
       ssr: false 
     },
-    '@/plugins/swiper'
+    '@/plugins/swiper',
+    '@/plugins/isLogin'
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

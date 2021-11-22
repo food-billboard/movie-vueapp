@@ -68,7 +68,8 @@ export default {
         init
       })
       this.error = !!err
-      this.finished = !value.length 
+      this.finished = !value.length || value.length < this.pageSize
+      this.internalCurrPage += 1
     }
   }
 }

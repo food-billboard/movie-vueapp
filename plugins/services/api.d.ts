@@ -127,3 +127,11 @@ declare namespace API_UPLOAD {
     load: string 
   }
 }
+
+declare namespace API_CUSTOMER {
+
+  export interface IGetMovieDetailParams {
+    _id: string 
+  }
+
+}

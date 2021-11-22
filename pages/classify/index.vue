@@ -8,24 +8,25 @@
     <loading-list
       ref="loading-list"
       :fetch-data="fetchData"
+      :refresh="handleClick.bind(this, currentClassify)"
     >
-      <div
+      <list-item
         v-for="item in classify"
         :key="item.id"
-        style="height: 100px"
-      >
-        {{item.id}}
-      </div>
+        :value="item"
+      />
     </loading-list>
   </div>
 </template>
 <script>
   import Header from './components/header'
   import List from '@/components/List'
+  import ListItem from '@/components/ListMovie'
   export default {
     components: {
       LoadingList: List,
-      ClassifyHeader: Header
+      ClassifyHeader: Header,
+      ListItem
     },
     async asyncData({ app, route }) {
       const { query } = route
