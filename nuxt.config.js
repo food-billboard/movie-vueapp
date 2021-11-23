@@ -49,7 +49,7 @@ export default {
       ssr: false 
     },
     '@/plugins/swiper',
-    '@/plugins/isLogin'
+    '@/plugins/isLogin',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -68,6 +68,7 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     'cookie-universal-nuxt',
+    'nuxt-vuex-localstorage'
     // "@nuxtjs/proxy"
   ],
 

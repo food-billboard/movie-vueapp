@@ -12,6 +12,10 @@ const UserServePlugin: Plugin = (context, inject) => {
     getNotice() {
       return request("/api/user/home/notice")
     },
+    // 小程序信息
+    getAppInfo() {
+      return request("/api/user/setting/info")
+    },
     // 轮播图
     getSwiper() {
       return request("/api/user/home/swiper")

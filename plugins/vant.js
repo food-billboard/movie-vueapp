@@ -37,7 +37,9 @@ import {
   SwipeItem,
   Swipe,
   Cell,
-  CellGroup
+  CellGroup,
+  RadioGroup,
+  Dialog
 } from 'vant'
 
 export default {
@@ -81,5 +83,7 @@ export default {
     Vue.use(Swipe)
     Vue.use(Cell)
     Vue.use(CellGroup)
+    Vue.use(RadioGroup)
+    Vue.use(Dialog)
   }
 }
