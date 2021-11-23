@@ -1,5 +1,10 @@
 import { withTry } from '../utils'
 
+export const HOME_MENU = [
+  "/home",
+  "/mine"
+]
+
 const WHITE_LIST: string[] = [
   "/home",
 

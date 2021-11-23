@@ -12,11 +12,20 @@
   </div>
 </template>
 <script>
+import { HOME_MENU } from '../middleware/auth'
 export default {
   data() {
     return {
       activeBar: 0
     }
+  },
+  watch: { 
+    "$route" () {
+      this.onRouteChange()
+    }
+  },
+  created() {
+    this.onRouteChange()
   },
   methods: {
     handleChange() {
@@ -32,6 +41,16 @@ export default {
             path: "/mine"
           })
           break 
+      }
+    },
+    isHomeQuery() {
+      const { fullPath } = this.$route
+      return HOME_MENU.indexOf(fullPath)
+    },
+    onRouteChange() {
+      const index = this.isHomeQuery()
+      if(~index) {
+        this.activeBar = index 
       }
     }
   }
