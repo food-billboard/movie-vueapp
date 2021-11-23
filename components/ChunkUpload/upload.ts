@@ -113,7 +113,8 @@ export function formatDefaultValue(value: string | string[] | object[] | object)
   return formatValue.map((item) => {
     if(typeof item === "string") {
       return {
-        _id: item 
+        _id: item,
+        url: (item.startsWith("http") || item.startsWith("localhost") || item.startsWith("blob")) ? item : undefined
       }
     }
     return item 

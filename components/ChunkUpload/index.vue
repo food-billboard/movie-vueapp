@@ -82,6 +82,10 @@ export default {
           })
         }
       }, this.stateValue)
+    },
+    setValue(value) {
+      const realValue = formatDefaultValue(value)
+      this.stateValue = realValue
     }
   },
 };

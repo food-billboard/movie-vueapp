@@ -28,6 +28,18 @@ const UserServePlugin: Plugin = (context, inject) => {
         method: "DELETE",
         params
       })
+    },
+    putAvatar(data: API_CUSTOMER.IGetMovieDetailParams) {
+      return request("/api/customer/manage/info/avatar", {
+        method: "PUT",
+        data
+      })
+    },
+    putUsername(data: API_CUSTOMER.IPutUsernameParams) {
+      return request("/api/customer/manage/info/name", {
+        method: "PUT",
+        data
+      })
     }
   })
 }

@@ -11,6 +11,8 @@
     :round="round"
     :disabled="disabled"
     :loading-size="loadingSize"
+    :block="block"
+    :native-type="nativeType"
     @click="handleClick"
   >
     <slot></slot>
@@ -59,6 +61,10 @@ export default {
       type: Boolean,
       default: false,
     },
+    block: {
+      type: Boolean,
+      default: false,
+    },
     disabled: {
       type: Boolean,
       default: false,
@@ -67,6 +73,10 @@ export default {
       type: String,
       default: "20px",
     },
+    nativeType: {
+      type: String,
+      default: undefined,
+    }
   },
   data() {
     return {

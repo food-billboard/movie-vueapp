@@ -134,4 +134,8 @@ declare namespace API_CUSTOMER {
     _id: string 
   }
 
+  export interface IPutUsernameParams {
+    name: string 
+  }
+
 }
