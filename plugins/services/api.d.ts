@@ -138,4 +138,25 @@ declare namespace API_CUSTOMER {
     name: string 
   }
 
+  export interface IPutFeedbackParams {
+    content: {
+      text?: string
+      image?: string[]
+      video?: string[]
+    }
+  }
+
+}
+
+declare namespace API_MEDIA {
+  
+  export interface IPutMoviePosterParams {
+    _id: string 
+    name?: string 
+    origin_type?: "ORIGIN"| "USER"
+    auth?: "PUBLIC" | "PRIVATE"
+    time?: string 
+    overlap?: boolean 
+  }
+
 }

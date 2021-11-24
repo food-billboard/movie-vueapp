@@ -40,6 +40,19 @@ const UserServePlugin: Plugin = (context, inject) => {
         method: "PUT",
         data
       })
+    },
+    // 用户反馈
+    postFeedback(data: API_CUSTOMER.IPutFeedbackParams) {
+      return request("/api/customer/manage/feedback", {
+        method: "POST",
+        data
+      })
+    },
+    // 用户反馈预查
+    feedbackCheck() {
+      return request("/api/customer/manage/feedback/precheck", {
+        method: "GET"
+      })
     }
   })
 }

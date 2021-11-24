@@ -55,6 +55,17 @@ function beforeDelete(instance: Upload, name: Symbol, fileList: any) {
   }
 }
 
+async function generateVideoPoster(config: any, putVideoPoster: any) {
+  const { task, _id } = config 
+  if(task.file.mime.startsWith("video")) {
+    const result = await putVideoPoster({
+      _id
+    })
+    return result.src || ""
+  }
+  return ""
+}
+
 export function upload(instance: Upload, file: File, onChange: Function, fileList: any[]) {
   const config: any = {
     status: "uploading",
@@ -66,6 +77,8 @@ export function upload(instance: Upload, file: File, onChange: Function, fileLis
   const exitFnRequest = this.$API_UPLOAD.checkUploadFile
   // @ts-ignore
   const uploadFile = this.$API_UPLOAD.uploadFile
+  // @ts-ignore
+  const putVideoPoster = this.$API_MEDIA.putVideoPoster
 
   const [ name ] = instance.add({
     file: {
@@ -85,7 +98,14 @@ export function upload(instance: Upload, file: File, onChange: Function, fileLis
           config.status = "done"
           config.message = "上传成功"
         }
-        onChange(config)
+        generateVideoPoster(config, putVideoPoster)
+        .then((data) => {
+          if(data) config.url = data 
+          onChange(config)
+        })
+        .catch(() => {
+          onChange(config)
+        })
       }
     },
   })

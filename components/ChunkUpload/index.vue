@@ -70,18 +70,21 @@ export default {
   },
   methods: {
     afterRead(wrapperFile) {
-      const { file } = wrapperFile
-      upload.call(this, this.uploadInstance, file, (newTargetFile) => {
-        const index = this.stateValue.findIndex(item => item.file === file)
-        if(~index) {
-          const prevValue = this.stateValue 
-          const prev = prevValue[index]
-          prevValue.splice(index, 1, {
-            ...prev,
-            ...newTargetFile
-          })
-        }
-      }, this.stateValue)
+      const realFileList = Array.isArray(wrapperFile) ? wrapperFile : [wrapperFile]
+      realFileList.forEach(wrapperFile => {
+        const { file } = wrapperFile
+        upload.call(this, this.uploadInstance, file, (newTargetFile) => {
+          const index = this.stateValue.findIndex(item => item.file === file)
+          if(~index) {
+            const prevValue = this.stateValue 
+            const prev = prevValue[index]
+            prevValue.splice(index, 1, {
+              ...prev,
+              ...newTargetFile
+            })
+          }
+        }, this.stateValue)
+      })
     },
     setValue(value) {
       const realValue = formatDefaultValue(value)
