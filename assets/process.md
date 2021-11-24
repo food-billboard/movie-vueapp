@@ -7,6 +7,7 @@
 2. 列表形式电影列表 `/components/ListMovie`  
 3. 懒加载列表  `/components/List`  
 4. 文件上传  `/components/ChunkUpload`  
+5. 评论组件 `/components/Comment`
 
 ## 首页 
 - 路由  
@@ -38,3 +39,13 @@
 /mine  
 - 是否完成: 是  
 当中也包含新增了一些空白页面，做路由跳转，后面直接在那些页面上进行开发  
+
+## 反馈页面  
+- 个人中心里面的反馈页面  
+/feedback  
+- 是否完成: 是  
+
+## 基础设置页面  
+- 个人中心里面的个人信息设置页面  
+/base-setting  
+- 是否完成: 是  
