@@ -1,5 +1,6 @@
 <template>
   <div class="color-setting">
+    <div :class="['internal', color, 'primary']">1111</div>
     <van-radio-group v-model="colorSet">
       <van-cell-group>
         <van-cell title="开启色调" clickable @click="handleChangeColorSet('0')">
@@ -38,7 +39,11 @@
 </template>
 <script>
 import ColorManger, { COLOR_LIST, defaultColor } from '@/utils/color'
+import layoutMixin from '@/mixins/layout'
 export default {
+  mixins: [
+    layoutMixin
+  ],
   data() {
     return {
       colorSet: "0",

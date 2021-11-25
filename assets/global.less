@@ -44,3 +44,51 @@
 .light-background {
   background-color: rgba(255, 255, 255, 0.5);
 }
+
+// --------------------theme--------------------
+
+@theme-css-types: color, background-color, border-color;
+
+@theme-names: primary, secondary, disabled, thirdly, bgColor;
+
+@theme-types: ff5222d, ffa541c, ffa8c16, ffaad14, ffadb14, fa0d911, f52c41a, f13c2c2, f1890ff, f2f54eb, f722ed1, feb2f96, f262626;
+
+@theme-colors: 
+  #f5222d, #ff4d4f, #ffccc7, #ff7875, #fff1f0,
+  #fa541c, #ff7a45, #ff9c6e, #ffbb96, #fff2e8,
+  #fa8c16, #ffa940, #ffc069, #ffe7ba, #fff7e6,
+  #faad14, #ffc53d, #ffd666, #fff1b8, #fffbe6,
+  #fadb14, #ffec3d, #fff566, #ffffb8, #feffe6,
+  #a0d911, #bae637, #d3f261, #f4ffb8, #fcffe6,
+  #52c41a, #73d13d, #95de64, #d9f7be, #f6ffed,
+  #13c2c2, #36cfc9, #5cdbd3, #b5f5ec, #e6fffb,
+  #1890ff, #40a9ff, #69c0ff, #bae7ff, #e6f7ff,
+  #2f54eb, #597ef7, #85a5ff, #d6e4ff, #f0f5ff,
+  #722ed1, #9254de, #b37feb, #efdbff, #f9f0ff,
+  #eb2f96, #f759ab, #ff85c0, #ffd6e7, #fff0f6,
+  #262626, #8c8c8c, #bfbfbf, #d9d9d9, #f5f5f5
+;
+
+.loop(@i) when (@i < length(@theme-types) + 1) {
+  @theme-type: extract(@theme-types, @i);
+  .loop_internal(@j) when (@j < length(@theme-names) + 1) {
+    @theme-name: extract(@theme-names, @j);
+    @theme-color: extract(@theme-colors, (@i - 1) * 5 + @j);
+    
+    .loop_sub_internal(@z) when(@z < length(@theme-css-types) + 1) {
+      @theme-css-type: extract(@theme-css-types, @z);
+
+      .@{theme-name}.@{theme-type}.@{theme-css-type} {
+        @{theme-css-type}: @theme-color;
+      }
+
+      .loop_sub_internal(@z + 1);
+    }   
+
+    .loop_sub_internal(1);
+    .loop_internal(@j + 1);
+  }
+  .loop_internal(1);
+  .loop(@i + 1);
+}
+.loop(1);

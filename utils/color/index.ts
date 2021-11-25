@@ -1,14 +1,13 @@
+import COLOR_MAP from "./color.map"
 
-export const COLOR_LIST = [
-  "red",
-  "green",
-  "yellow",
-  "pink",
-  "black",
-  "gray",
-  "blue",
-  "orange",
-]
+const colorValues = Object.values(COLOR_MAP)
+
+export const COLOR_LIST = colorValues.reduce((acc, cur) => {
+  const list = Object.keys(cur)
+  acc.push(...list)
+  acc = Array.from(new Set(acc))
+  return acc 
+}, [] as any)
 
 type TColorStorage = {
   color: string 
