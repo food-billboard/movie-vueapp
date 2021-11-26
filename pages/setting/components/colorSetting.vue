@@ -2,19 +2,25 @@
   <div class="color-setting">
     <van-radio-group v-model="colorSet">
       <van-cell-group>
-        <van-cell title="开启色调" clickable @click="handleChangeColorSet('0')">
+        <van-cell title="开启自动色调" clickable @click="handleChangeColorSet('0')">
           <template #right-icon>
             <van-radio name="0" />
           </template>
         </van-cell>
-        <van-cell title="关闭色调" clickable @click="handleChangeColorSet('1')">
+        <van-cell title="关闭自动色调" clickable @click="handleChangeColorSet('1')">
           <template #right-icon>
             <van-radio name="1" />
+          </template>
+        </van-cell>
+        <van-cell title="关闭色调" clickable @click="handleChangeColorSet('2')">
+          <template #right-icon>
+            <van-radio name="2" />
           </template>
         </van-cell>
       </van-cell-group>
     </van-radio-group>
     <div 
+      v-show="colorSet !== '2'"
       class="color-list"
     >
       <div

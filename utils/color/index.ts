@@ -13,7 +13,7 @@ export const COLOR_LIST = FULL_COLOR_LIST.slice(0, FULL_COLOR_LIST.length / 2)
 
 type TColorStorage = {
   color: string 
-  mode: "0" | "1" 
+  mode: "0" | "1" | "2"
 }
 
 export function defaultColor() {
@@ -85,17 +85,23 @@ class ColorManger {
     return hour >= 20 || hour < 9
   }
 
+  isClose() {
+    return this.currentMode === "2"
+  }
+
   isModeAndNight() {
     return this.currentMode === "0" && this.isNight()
   }
 
   currentModeColor(color: string) {
+    if(this.isClose()) return ""
     if(!this.isModeAndNight()) return color
     const index = FULL_COLOR_LIST.indexOf(color)
     return FULL_COLOR_LIST[FULL_COLOR_LIST.length / 2 + index]
   }
 
   generateStyleColor(color: string, level: string) {
+    if(this.isClose()) return "transparent"
     const currentColor = this.currentModeColor(color)
     const modeMap = this.isModeAndNight() ?  "NIGHT" : "DAY"
     const colorMap = COLOR_MAP[modeMap]
