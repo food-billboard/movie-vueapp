@@ -51,9 +51,22 @@
 
 @theme-names: primary, secondary, disabled, thirdly, bgColor;
 
-@theme-types: ff5222d, ffa541c, ffa8c16, ffaad14, ffadb14, fa0d911, f52c41a, f13c2c2, f1890ff, f2f54eb, f722ed1, feb2f96, f262626;
+@theme-types: 
+  ff5222d, ffa541c, ffa8c16, 
+  ffaad14, ffadb14, fa0d911, 
+  f52c41a, f13c2c2, f1890ff, 
+  f2f54eb, f722ed1, feb2f96, 
+  f262626,
+
+  f2a1215, f2b1611, f2b1d11,
+  f2b2111, f2b2611, f1f2611, 
+  f162312, f112123, f111d2c, 
+  f131629, f1a1325, f291321,
+  f262626
+;
 
 @theme-colors: 
+
   #f5222d, #ff4d4f, #ffccc7, #ff7875, #fff1f0,
   #fa541c, #ff7a45, #ff9c6e, #ffbb96, #fff2e8,
   #fa8c16, #ffa940, #ffc069, #ffe7ba, #fff7e6,
@@ -66,7 +79,21 @@
   #2f54eb, #597ef7, #85a5ff, #d6e4ff, #f0f5ff,
   #722ed1, #9254de, #b37feb, #efdbff, #f9f0ff,
   #eb2f96, #f759ab, #ff85c0, #ffd6e7, #fff0f6,
-  #262626, #8c8c8c, #bfbfbf, #d9d9d9, #f5f5f5
+  #262626, #8c8c8c, #bfbfbf, #d9d9d9, #f5f5f5,
+
+  #2a1215, #431418, #58181c, #791a1f ,#a61d24,
+  #2b1611, #441d12, #592716, #7c3118, #aa3e19,
+  #2b1d11, #442a11, #593815, #7c4a15, #aa6215,
+  #2b2111, #443111, #594214, #7c5914, #aa7714,
+  #2b2611, #443b11, #595014 ,#7c6e14 ,#aa9514,
+  #1f2611, #2e3c10, #3e4f13 ,#536d13, #6f9412,
+  #162312, #1d3712, #274916, #306317, #3c8618,
+  #112123, #113536, #144848, #146262, #138585,
+  #111d2c, #112a45, #15395b, #164c7e, #1765ad,
+  #131629, #161d40, #1c2755, #203175, #263ea0,
+  #1a1325, #24163a, #301c4d, #3e2069, #51258f,
+  #291321, #40162f, #551c3b, #75204f, #a02669,
+  #262626, #434343, #595959, #bfbfbf, #d9d9d9
 ;
 
 .loop(@i) when (@i < length(@theme-types) + 1) {

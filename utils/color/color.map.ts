@@ -119,7 +119,7 @@ const COLOR_MAP = {
   },
   NIGHT: {
     // 薄暮
-    '#f5222d': {
+    '#2a1215': {
       'primary':'#2a1215',
       'secondary': '#431418',
       'thirdly': '#58181c',
@@ -128,7 +128,7 @@ const COLOR_MAP = {
     },
 
     // 火山
-    '#fa541c': {
+    '#2b1611': {
       'primary':'#2b1611',
       'secondary': '#441d12',
       'thirdly': '#592716',
@@ -137,7 +137,7 @@ const COLOR_MAP = {
     },
 
     // 日暮
-    '#fa8c16': {
+    '#2b1d11': {
       'primary':'#2b1d11',
       'secondary': '#442a11',
       'thirdly': '#593815',
@@ -146,7 +146,7 @@ const COLOR_MAP = {
     },
 
     // 金盏花
-    '#faad14': {
+    '#2b2111': {
       'primary':'#2b2111',
       'secondary': '#443111',
       'thirdly': '#594214',
@@ -155,7 +155,7 @@ const COLOR_MAP = {
     },
 
     // 日出
-    '#fadb14': {
+    '#2b2611': {
       'primary':'#2b2611',
       'secondary': '#443b11',
       'thirdly': '#595014',
@@ -164,7 +164,7 @@ const COLOR_MAP = {
     },
 
     // 青柠
-    '#a0d911': {
+    '#1f2611': {
       'primary':'#1f2611',
       'secondary': '#2e3c10',
       'thirdly': '#3e4f13',
@@ -173,7 +173,7 @@ const COLOR_MAP = {
     },
 
     // 极光绿
-    '#52c41a': {
+    '#162312': {
       'primary':'#162312',
       'secondary': '#1d3712',
       'thirdly': '#274916',
@@ -182,7 +182,7 @@ const COLOR_MAP = {
     },
 
     // 明青
-    '#13c2c2': {
+    '#112123': {
       'primary':'#112123',
       'secondary': '#113536',
       'thirdly': '#144848',
@@ -191,7 +191,7 @@ const COLOR_MAP = {
     },
 
     // 拂晓蓝
-    '#1890ff': {
+    '#111d2c': {
       'primary':'#111d2c',
       'secondary': '#112a45',
       'thirdly': '#15395b',
@@ -200,7 +200,7 @@ const COLOR_MAP = {
     },
 
     // 极客蓝
-    '#2f54eb': {
+    '#131629': {
       'primary':'#131629',
       'secondary': '#161d40',
       'thirdly': '#1c2755',
@@ -209,7 +209,7 @@ const COLOR_MAP = {
     },
 
     // 酱紫
-    '#722ed1': {
+    '#1a1325': {
       'primary':'#1a1325',
       'secondary': '#24163a',
       'thirdly': '#301c4d',
@@ -218,7 +218,7 @@ const COLOR_MAP = {
     },
 
     // 法式洋红
-    '#eb2f96': {
+    '#291321': {
       'primary':'#291321',
       'secondary': '#40162f',
       'thirdly': '#551c3b',

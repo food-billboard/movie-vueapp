@@ -1,16 +1,18 @@
+import ColorManger, { defaultColor } from '@/utils/color'
 
 export default {
   data() {
+    const defaultColorTheme = defaultColor()
     return {
-      currentColor: "#a0d911",
+      currentColorTheme: defaultColorTheme,
       currentMode: "0",
-      realColorClass: "fa0d911"
+      realColorClass: this.realColorClassSet(defaultColorTheme),
     }
   },
-  created() {
-    if (process.browser) {
-      this.updateData(this.currentColorState)
-    }
+  mounted() {
+    this.currentColorTheme = ColorManger(this).currentColor
+    this.currentMode = ColorManger(this).currentMode
+    this.realColorClass = this.realColorClassSet(this.currentColorTheme)
   },
   watch: {
     currentColorState: {
@@ -22,22 +24,14 @@ export default {
   },
   methods: {
     updateData(state) {
-      this.currentColor = state.color 
+      this.currentColorTheme = state.color 
       this.currentMode = state.mode 
       this.realColorClass = this.realColorClassSet(state.color)
     },
     realColorClassSet(color) {
-      return `f${color.slice(1)}`
+      const realColor = ColorManger(this).currentModeColor(color)
+      return `f${realColor.slice(1)}`
     },
-    // border() {
-    //   return `border-color ${this.realColorClass}`
-    // },
-    // background() {
-    //   return `background-color ${this.realColorClass}`
-    // },
-    // color() {
-    //   return `color ${this.realColorClass}`
-    // },
   },
   computed: {
     currentColorState() {
@@ -50,7 +44,6 @@ export default {
       return `background-color ${this.realColorClass}`
     },
     color() {
-      console.log(this.realColorClass, 22233)
       return `color ${this.realColorClass}`
     },
     boxShadow() {

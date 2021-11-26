@@ -1,13 +1,16 @@
 import COLOR_MAP from "./color.map"
 
-const colorValues = Object.values(COLOR_MAP)
-
-export const COLOR_LIST = colorValues.reduce((acc, cur) => {
+const FULL_COLOR_LIST = [
+  COLOR_MAP.DAY,
+  COLOR_MAP.NIGHT
+].reduce((acc, cur) => {
   const list = Object.keys(cur)
   acc.push(...list)
-  acc = Array.from(new Set(acc))
+  // acc = Array.from(new Set(acc))
   return acc 
 }, [] as any)
+
+export const COLOR_LIST = FULL_COLOR_LIST.slice(0, FULL_COLOR_LIST.length / 2)
 
 type TColorStorage = {
   color: string 
@@ -76,6 +79,13 @@ class ColorManger {
 
   get defaultColor() {
     return defaultColor()
+  }
+
+  currentModeColor(color: string) {
+    const numberMode = this.currentMode 
+    if(numberMode === "0") return color
+    const index = FULL_COLOR_LIST.indexOf(color)
+    return FULL_COLOR_LIST[FULL_COLOR_LIST.length / 2 + index]
   }
 
 }
