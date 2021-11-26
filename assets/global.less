@@ -115,6 +115,148 @@
     .loop_sub_internal(1);
     .loop_internal(@j + 1);
   }
+
+  // vant less style 
+
+  .@{theme-type}-wrapper {
+
+    @primary-color: extract(@theme-colors, (@i - 1) * 5 + 1);
+    @disabled-color: extract(@theme-colors, (@i - 1) * 5 + 3);
+
+    // common 
+    .common-border {
+      border-color: @primary-color;
+    }
+    .common-background {
+      background-color: @primary-color;
+    }
+    .common-color {
+      color: @primary-color;
+    }
+    .common-bor-back {
+      .common-border;
+      .common-background
+    }
+
+    .common-disabled-border {
+      border-color: @disabled-color;
+    }
+    .common-disabled-background {
+      background-color: @disabled-color;
+    }
+    .common-disabled-color {
+      color: @disabled-color;
+    }
+    .common-disabled-bor-back {
+      .common-disabled-border;
+      .common-disabled-background
+    }
+    
+    // button 
+    .van-button--info {
+      border-color: extract(@theme-colors, (@i - 1) * 5 + 4);
+      background-color: extract(@theme-colors, (@i - 1) * 5 + 4);
+      color: @primary-color;
+    }
+    .van-button--primary {
+      .common-bor-back;
+    }
+    // .van-button--warning {
+    //   border-color: extract(@theme-colors, (@i - 1) * 5 + 3);
+    //   background-color: extract(@theme-colors, (@i - 1) * 5 + 3);
+    // }
+
+    //checkbox 
+    .van-checkbox__icon--checked .van-icon {
+      .common-bor-back;
+    }
+
+    // radio 
+    .van-radio__icon--checked .van-icon {
+      .common-bor-back;
+    }
+
+    // rate 
+    .van-rate__icon--full {
+      .common-color;
+    }
+    .van-rate__icon--disabled {
+      .common-disabled-color;
+    }
+
+    // slider 
+    .van-slider__bar {
+      .common-background;
+    }
+
+    // switch 
+    .van-switch--on {
+      .common-background;
+    }
+
+    // loading 
+    .van-loading {
+      .common-color;
+    }
+
+    // notify 
+    .van-notify--primary {
+      .common-background;
+    }
+    .van-notify--success {
+      background-color: extract(@theme-colors, (@i - 1) * 5 + 4);
+    }
+
+    // badge 
+    .van-badge {
+      .common-background;
+    }
+
+    // circle 
+    .van-circle__hover {
+      stroke: @primary-color;
+    }
+
+    // divider 
+    .van-divider {
+      .common-disabled-border;
+    }
+
+    // noticebar 
+    .van-notice-bar {
+      .common-color;
+      .common-disabled-background;
+    }
+
+    // progress 
+    .van-progress__portion {
+      .common-background;
+    }
+    .van-progress__pivot {
+      .common-background;
+    }
+
+    // tag 
+    .van-tag--primary {
+      .common-background;
+    }
+    .van-tag--success {
+      background-color: extract(@theme-colors, (@i - 1) * 5 + 4);
+    }
+
+    // tabs 
+    .van-tabs__line {
+      .common-background;
+    }
+
+    // tabbar 
+    .van-tabbar-item--active {
+      .common-color;
+    }
+    
+
+  }
+
   .loop_internal(1);
   .loop(@i + 1);
 }

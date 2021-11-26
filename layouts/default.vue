@@ -1,6 +1,6 @@
 <template>
-  <div id="movie-wrapper">
-    <main class="main test">
+  <div id="movie-wrapper" :class="`${realColorClass}-wrapper`">
+    <main class="main">
       <nuxt />
     </main>
   </div>

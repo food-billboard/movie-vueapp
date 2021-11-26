@@ -123,9 +123,12 @@ export default {
         lessOptions: {
           javascriptEnabled: true,
           modifyVars: {
-            hack: `true; @import "${resolve(
-              "./assets/variable.less"
-            )}";`
+            hack: `
+              true; 
+              @import "${resolve(
+                "./assets/variable.less"
+              )}";
+            `
           }
         }
       },
