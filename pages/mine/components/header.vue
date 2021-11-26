@@ -1,6 +1,11 @@
 <template>
   <div
-    class="mine-header"
+    :class="[
+      'mine-header',
+      'disabled',
+      'background-color',
+      realColorClass
+    ]"
   >
     <van-image
       width="2.5rem"
@@ -10,7 +15,7 @@
       fit="fill"
       lazy-load
     />
-    <div class="mine-header-username">
+    <div :class="[ 'mine-header-username', 'color', 'primary', realColorClass ]">
       {{value.username}}
     </div>
     <div class="mine-header-info">
@@ -19,14 +24,18 @@
         :key="item.title"
         class="mine-header-info-content"
       >
-        <span class="mine-header-info-content-data">{{item.value}}</span>
-        <span class="mine-header-info-content-title">{{item.title}}</span>
+        <span :class="['mine-header-info-content-data', 'thirdly', 'color', realColorClass]">{{item.value}}</span>
+        <span :class="['mine-header-info-content-title', 'primary', 'color', realColorClass]">{{item.title}}</span>
       </div>
     </div>
   </div>
 </template>
 <script>
+import layoutMixin from '@/mixins/layout'
 export default {
+  mixins: [
+    layoutMixin
+  ],
   computed: {
     value() {
       return this.$store.state.user.userInfo || {}
@@ -57,7 +66,6 @@ export default {
     display: flex;
     justify-content: center;
     flex-direction: column;
-    background-color: @secondary-background-color;
     align-items: center;
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
@@ -73,9 +81,6 @@ export default {
       &-content {
         &-data {
           font-weight: bold;
-        }
-        &-title {
-          color: @thirdly-text-color;
         }
       }
     }

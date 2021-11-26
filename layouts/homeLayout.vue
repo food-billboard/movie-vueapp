@@ -1,6 +1,13 @@
 <template>
-  <div id="movie-home-wrapper">
-    <main class="main">
+  <div id="movie-home-wrapper" :class="`${realColorClass}-wrapper`">
+    <main
+      :class="[
+        'main',
+        'bgColor',
+        'background-color',
+        realColorClass
+      ]"
+    >
       <nuxt />
     </main>
     <footer>
@@ -13,7 +20,11 @@
 </template>
 <script>
 import { HOME_MENU } from '../middleware/auth'
+import layoutMixin from '@/mixins/layout'
 export default {
+  mixins: [
+    layoutMixin
+  ],
   data() {
     return {
       activeBar: 0

@@ -19,7 +19,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-  .mine-page {
-    color: red;
+  .main-page {
+    height: calc(100vh - 50px);
   }
 </style>

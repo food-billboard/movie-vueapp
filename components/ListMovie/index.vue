@@ -11,14 +11,14 @@
         @click="handleGetDetail"
       >
         <div class="movie-list-item-info-title">{{value.name || "-"}}</div>
-        <van-rate v-model="rate" :size="15" readonly color="#ffd21e" />
-        <div class="movie-list-item-info-sub-title">{{value.public_time}}</div>
-        <div class="movie-list-item-info-sub-title">
+        <van-rate v-model="rate" :size="15" readonly />
+        <color-div type="secondary" class="movie-list-item-info-sub-title">{{value.public_time}}</color-div>
+        <color-div type="secondary" class="movie-list-item-info-sub-title">
           {{value.hot}}
-          <van-icon name="friends-o" />
-        </div>
+          <color-icon name="friends-o" />
+        </color-div>
       </div>
-      <div class="movie-list-item-action">
+      <div :class="[ 'movie-list-item-action', 'primary', 'border-color', realColorClass ]">
         <div
           class="movie-list-item-action-item"
           @click="handleStore"
@@ -28,14 +28,18 @@
         </div>
       </div>
     </div>
-    <div class="movie-list-item-description ellipsis">
+    <div :class="['movie-list-item-description ellipsis', 'background-color', 'disabled']">
       {{value.description || "-"}} 
     </div>
   </div>
 </template>
 <script>
+import LayoutMixin from '@/mixins/layout'
 import { withTry } from '@/utils'
 export default {
+  mixins: [
+    LayoutMixin
+  ],
   props: {
     value: {
       type: Object,
@@ -138,11 +142,10 @@ export default {
       }
       &-sub-title {
         font-size: @sub-title-font-size;
-        color: @secondary-text-color;
       }
     }
     &-action {
-      border-left: 1px dashed @active-text-color;
+      border-left: 1px dashed;
       padding: 0 @normal-padding;
       display: flex;
       align-items: center;
@@ -161,9 +164,7 @@ export default {
       }
     }
     &-description {
-      color: @secondary-text-color;
       padding: @normal-padding / 4;
-      background-color: @normal-background;
       font-size: @sub-title-font-size;
     }
   }

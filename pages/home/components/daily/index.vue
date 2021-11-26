@@ -63,6 +63,5 @@
 }
 .daily-swiper {
   height: 25vw;
-  background-color: @normal-background;
 }
 </style>

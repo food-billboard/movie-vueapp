@@ -21,8 +21,8 @@
       @click="handleGetDetail"
     >
       <div class="movie-card-item-info-title">{{value.name || "-"}}</div>
-      <van-rate v-model="rate" :size="15" readonly color="#ffd21e" />
-      <div class="movie-card-item-info-sub-title">{{value.public_time}}</div>
+      <van-rate v-model="rate" :size="15" readonly />
+      <color-div type="secondary" class="movie-card-item-info-sub-title">{{value.public_time}}</color-div>
       <div class="movie-card-item-info-sub-title">
         {{value.hot}}
         <van-icon name="friends-o" />
@@ -150,15 +150,14 @@ export default {
       line-height: 1.4;
       &-title {
         font-size: @title-font-size;
-        text-shadow: 0 0 5px @normal-background;
+        // text-shadow: 0 0 5px @normal-background;
       }
       &-sub-title {
         font-size: @sub-title-font-size;
-        color: @secondary-text-color;
       }
     }
   }
-  .movie-card-active-item {
-    box-shadow: 0 0 5px @normal-background;
-  } 
+  // .movie-card-active-item {
+  //   box-shadow: 0 0 5px @normal-background;
+  // } 
 </style>

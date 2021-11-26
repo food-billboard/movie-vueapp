@@ -1,22 +1,36 @@
 <template>
   <div class="mine-info">
-    <div class="mine-info-content">
-      <div class="mine-info-content-main">
+    <div :class="[ 'mine-info-content', 'background-color', 'disabled', realColorClass ]">
+      <div :class="[
+        'mine-info-content-main',
+        'border-color',
+        'secondary',
+        realColorClass
+      ]">
         <div
           v-for="(item, index) in mainAction"
           :key="item.title"
           :class="['mine-info-content-main-item', {
-            'mine-info-content-main-item-active': index !== mainAction.length - 1
+            'mine-info-content-main-item-active': index !== mainAction.length - 1,
           }]"
           @click="handleActionDetail(item)"
         >
-          <div>
-            <van-icon :name="item.icon" class="mine-info-icon" />
-            <div class="mine-info-text">{{item.title}}</div>
+          <div
+            :class="[ {
+              'border-color secondary': index !== mainAction.length - 1,
+            }, realColorClass ]"
+          >
+            <color-icon :name="item.icon" />
+            <color-div class="mine-info-text">{{item.title}}</color-div>
           </div>
         </div>
       </div>
-      <div class="mine-info-content-main">
+      <div :class="[
+        'mine-info-content-main',
+        'border-color',
+        'secondary',
+        realColorClass
+      ]">
         <div
           v-for="(item) in subAction"
           :key="item.title"
@@ -24,8 +38,8 @@
           @click="handleActionDetail(item)"
         >
           <div>
-            <van-icon :name="item.icon" class="mine-info-icon" />
-            <div class="mine-info-text">{{item.title}}</div>
+            <color-icon :name="item.icon" />
+            <color-div class="mine-info-text">{{item.title}}</color-div>
           </div>
         </div>
       </div>
@@ -38,7 +52,7 @@
           @click="handleActionDetail(item)"
         >
           <template #icon>
-            <van-icon :name="item.icon" class="mine-info-icon mine-info-icon-setting" />
+            <color-icon :name="item.icon" class="mine-info-icon-setting" />
           </template>
         </van-cell>
       </van-cell-group>
@@ -46,7 +60,11 @@
   </div>
 </template>
 <script>
+import layoutMixin from '@/mixins/layout'
 export default {
+  mixins: [
+    layoutMixin
+  ],
   computed: {
     value() {
       return this.$store.state.user.userInfo || {}
@@ -127,12 +145,12 @@ export default {
   padding: 0 @normal-padding * 2;
   &-content {
     width: 100%;
-    background-color: @thirdly-background-color;
     border-radius: .2rem;
     overflow: hidden;
     // transform: translateY(@normal-margin * -1);
     &-main {
       display: flex;
+      border-bottom: 2px solid;
       &-item {
         flex: 1;
         padding: @normal-padding / 4 0;
@@ -145,20 +163,10 @@ export default {
       }
       &-item-active {
         & > div {
-          border-right: 1px solid @secondary-background-color;
+          border-right: 1px solid;
         }
       }
     }
-    &-sub {
-      display: flex;
-    }
-    &-main,
-    &-sub {
-      border-bottom: 2px solid @secondary-background-color;
-    }
-  }
-  &-icon {
-    color: @secondary-background-color;
   }
   &-icon-setting {
     height: 24px;

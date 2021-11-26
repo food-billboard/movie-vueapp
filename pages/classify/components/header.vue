@@ -13,11 +13,16 @@
           :key="item._id"
           :class="[
             'classify-item',
+            'color',
+            realColorClass,
             {
-              'classify-item-active': active === item._id && item._id !== '__prefix__'
+              'classify-item-active primary': active === item._id && item._id !== '__prefix__'
             },
             {
-              'classify-item-ellipsis': item._id === '__prefix__'
+              'secondary': active !== item._id && item._id !== '__prefix__'
+            },
+            {
+              'classify-item-ellipsis disabled': item._id === '__prefix__'
             }
           ]"
           @click="handleGetDetail(item)"
@@ -29,7 +34,11 @@
   </van-sticky>
 </template>
 <script>
+import LayoutMixins from '@/mixins/layout'
 export default {
+  mixins: [
+    LayoutMixins
+  ],
   props: {
     value: {
       type: Array,
@@ -92,10 +101,6 @@ export default {
     font-size: @title-font-size;
   }
   .classify-item-active {
-    color: @active-text-color;
     border-bottom: 3px solid;
-  }
-  .classify-item-ellipsis {
-    color: @secondary-text-color;
   }
 </style>

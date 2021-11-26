@@ -9,7 +9,7 @@
         @click="handleActionDetail(item)"
       >
         <template #icon>
-          <van-icon :name="item.icon" class="setting-info-icon setting-info-icon-setting" />
+          <color-icon :name="item.icon" class="setting-info-icon-setting" />
         </template>
       </van-cell>
     </van-cell-group>
@@ -96,9 +96,6 @@ export default {
 .setting-info {
   height: 100vh;
   position: relative;
-  &-icon {
-    color: @secondary-background-color;
-  }
   &-icon-setting {
     height: 24px;
     font-size: 0.416rem;

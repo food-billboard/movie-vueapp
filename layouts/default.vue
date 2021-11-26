@@ -1,6 +1,11 @@
 <template>
   <div id="movie-wrapper" :class="`${realColorClass}-wrapper`">
-    <main class="main">
+    <main :class="[
+      'main',
+      'bgColor',
+      'background-color',
+      realColorClass
+    ]">
       <nuxt />
     </main>
   </div>
