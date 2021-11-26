@@ -46,15 +46,11 @@ export default {
     color() {
       return `color ${this.realColorClass}`
     },
-    boxShadow() {
-      // return function() {
-      //   arguments.forEach(arg => {
-
-      //   })
-      // }
+    generateStyleColor() {
+      const that = this 
+      return function(level) {
+        return ColorManger(that).generateStyleColor(this.currentColorTheme, level)
+      }
     },
-    textShadow() {
-
-    }
   }
 }

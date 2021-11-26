@@ -1,8 +1,5 @@
 <template>
   <div class="color-setting">
-    <!-- <div :class="['internal', color, 'primary']">
-      11111
-    </div> -->
     <van-radio-group v-model="colorSet">
       <van-cell-group>
         <van-cell title="开启色调" clickable @click="handleChangeColorSet('0')">

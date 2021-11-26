@@ -6,7 +6,6 @@ const FULL_COLOR_LIST = [
 ].reduce((acc, cur) => {
   const list = Object.keys(cur)
   acc.push(...list)
-  // acc = Array.from(new Set(acc))
   return acc 
 }, [] as any)
 
@@ -81,11 +80,27 @@ class ColorManger {
     return defaultColor()
   }
 
+  isNight() {
+    const hour = new Date().getHours()
+    return hour >= 20 || hour < 9
+  }
+
+  isModeAndNight() {
+    return this.currentMode === "0" && this.isNight()
+  }
+
   currentModeColor(color: string) {
-    const numberMode = this.currentMode 
-    if(numberMode === "0") return color
+    if(!this.isModeAndNight()) return color
     const index = FULL_COLOR_LIST.indexOf(color)
     return FULL_COLOR_LIST[FULL_COLOR_LIST.length / 2 + index]
+  }
+
+  generateStyleColor(color: string, level: string) {
+    const currentColor = this.currentModeColor(color)
+    const modeMap = this.isModeAndNight() ?  "NIGHT" : "DAY"
+    const colorMap = COLOR_MAP[modeMap]
+    const colorTypeMap = colorMap[currentColor as keyof typeof colorMap] 
+    return colorTypeMap[level as keyof typeof colorTypeMap]
   }
 
 }
