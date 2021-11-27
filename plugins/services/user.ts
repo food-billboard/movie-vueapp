@@ -94,6 +94,20 @@ const UserServePlugin: Plugin = (context, inject) => {
         method: "GET",
         params
       })
+    },
+    // 排行榜名称列表
+    getRankNameList(params: API_USER.IGetRankNameListParams) {
+      return request("/api/user/movie/rank/specDropList", {
+        method: "GET",
+        params
+      })
+    },
+    // 排行榜
+    getRankList(params: API_USER.IGetRankListParams) {
+      return request("/api/user/movie/rank", {
+        method: "GET",
+        params
+      })
     }
   })
 }

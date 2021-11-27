@@ -4,6 +4,41 @@ declare namespace API_USER {
     count?: number 
   }
 
+  export interface IGetRankNameListParams {
+    count?: number 
+  }
+
+  export interface IGetRankListParams {
+    _id: string 
+    currPage?: number 
+    pageSize?: number 
+    glance?: 1 | -1 
+    author_rate?: 1 | -1 
+    hot?: 1 | -1 
+    rate_person?: 1 | -1 
+    total_rate?: 1 | -1 
+  }
+
+  export interface IGetRankListData {
+    author_rate: number 
+    description: string 
+    name: string
+    poster: string
+    _id: string
+    store: boolean
+    rate: number 
+    images: string[]
+    classify: { name: string }[]
+    publish_time: string 
+    hot: number 
+  }
+
+  export interface IGetRankNameListData {
+    name: string 
+    icon: string 
+    _id: string 
+  }
+
   export interface IGetClassifyListParams {
     _id: string 
     currPage?: number 

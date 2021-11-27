@@ -237,11 +237,14 @@
     }
 
     // tag 
-    .van-tag--primary {
+    .van-tag--primary:not(.van-tag--plain) {
       .common-background;
     }
-    .van-tag--success {
+    .van-tag--success:not(.van-tag--plain) {
       background-color: extract(@theme-colors, (@i - 1) * 5 + 4);
+    }
+    .van-tag--primary.van-tag--plain {
+      .common-color;
     }
 
     // tabs 

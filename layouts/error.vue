@@ -37,6 +37,9 @@ export default {
 </script>
 <style lang="less" scoped>
   @import url("/assets/global.less");
+  .error-page {
+    height: 100vh;
+  }
   .where-is-panfish {
     display: flex;
     flex-direction: column;
