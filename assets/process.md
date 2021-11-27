@@ -1,6 +1,16 @@
 
 # 完成度情况统计  
 
+## 颜色根据色调设置  
+- 利用`class`设置不同的色调，须同时使用下面两个类型以及`realColorClass`  
+类型有 `primary`、`secondary`、`disabled`、`thirdly`、`bgColor`  
+样式类型有 `border-color`、`background-color`、`color`  
+
+- 当用到其他颜色时，可以使用`style`进行设置  
+添加`generateStyleColor(level)`设置颜色   
+
+- 非页面文件需自行引入`/mixins/layout.js` 文件  
+
 ## 公共组件  
 
 1. 卡片形式电影列表 `/components/CardMovie`  
