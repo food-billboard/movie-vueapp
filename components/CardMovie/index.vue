@@ -32,7 +32,11 @@
 </template>
 <script>
 import { withTry } from '@/utils'
+import layoutMixins from '@/mixins/layout'
 export default {
+  mixins: [
+    layoutMixins
+  ],
   props: {
     value: {
       type: Object,
@@ -64,7 +68,7 @@ export default {
       return this.isStore ? "star" : "star-o"
     },
     storeColor() {
-      return this.isStore ? "#ffd21e" : undefined
+      return this.isStore ? this.generateStyleColor("primary") : undefined
     },
   },
   watch: {

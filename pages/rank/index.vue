@@ -76,7 +76,7 @@
         pageSize: 10,
         init: false
       }) {
-        if(!this.currentRank) return 
+        if(!this.currentRank) return []
         if(init) this.classify = []
         const data = await this.$API_USER.getRankList({
           currPage,

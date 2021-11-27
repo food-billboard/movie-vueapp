@@ -1,5 +1,5 @@
 <template>
-  <div :class="[ 'color', type, realColorClass ]" >
+  <div :class="[ 'color', type, realColorClass ]" @click="handleClick">
     <slot></slot>
   </div>
 </template>
@@ -13,6 +13,11 @@ export default {
     type: {
       type: String,
       default: "primary"
+    }
+  },
+  methods: {
+    handleClick(e) {
+      this.$emit("click", e)
     }
   }
 }

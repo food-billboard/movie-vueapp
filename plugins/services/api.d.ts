@@ -19,6 +19,45 @@ declare namespace API_USER {
     total_rate?: 1 | -1 
   }
 
+  export interface IGetSearchListParams {
+    currPage?: number 
+    pageSize?: number 
+    content?: string 
+    area?: string 
+    director?: string 
+    actor?: string 
+    lang?: string 
+    time?: string 
+    sort?: string 
+    classify?: string 
+  }
+
+  export interface IGetSearchListData {
+    _id: string 
+    glance: number 
+    hot: number 
+    name: string 
+    source_type: "comment" | "movie" 
+    status: "VERIFY" | "COMPLETE" | "NOT_VERIFY"
+    createdAt: string 
+    updatedAt: string 
+    images: string[] 
+    author: {
+      _id: string 
+      username: string 
+      avatar: string 
+    }
+    publish_time: string 
+    classify: string[]
+    description: string 
+    rate: number 
+  }
+
+  export interface IGetSearchOrderList {
+    name: string 
+    _id: string 
+  }
+
   export interface IGetRankListData {
     author_rate: number 
     description: string 

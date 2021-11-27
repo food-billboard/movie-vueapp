@@ -51,21 +51,22 @@ export default {
     }
   },
   methods: {
-    async onRefresh() {
+    async onRefresh(params={}) {
       this.resumeData?.()
       this.internalCurrPage = 0 
-      await this.internalFetchData(true)
+      await this.internalFetchData(true, params)
       this.refreshing = false 
     },
     async onLoad() {
       if(this.refreshing) return 
       await this.internalFetchData()
     },
-    async internalFetchData(init=false) {
+    async internalFetchData(init=false, params={}) {
       const [ err, value ] = await withTry(this.fetchData)({
         currPage: this.internalCurrPage,
         pageSize: this.pageSize,
-        init
+        init,
+        ...params
       })
       this.error = !!err
       this.finished = !value.length || value.length < this.pageSize

@@ -1,5 +1,5 @@
 <template>
-  <van-icon :name="name" :class="[ 'color', 'primary', realColorClass ]" />
+  <van-icon :name="name" :class="[ 'color', type, realColorClass ]" @click="handleClick" />
 </template>
 <script>
 import layoutMixin from '@/mixins/layout'
@@ -8,7 +8,16 @@ export default {
     layoutMixin
   ],
   props: {
-    name: String
+    name: String,
+    type: {
+      type: String,
+      default: "primary"
+    }
+  },
+  methods: {
+    handleClick(e) {
+      this.$emit("click", e)
+    }
   }
 }
 </script>

@@ -108,6 +108,19 @@ const UserServePlugin: Plugin = (context, inject) => {
         method: "GET",
         params
       })
+    },
+    // 搜索列表
+    getSearchList(params: API_USER.IGetSearchListParams) {
+      return request("/api/user/movie/search", {
+        method: "GET",
+        params
+      })
+    },
+    // 搜索排序字段列表
+    getSearchOrderList() {
+      return request("/api/user/movie/order", {
+        method: "GET",
+      })
     }
   })
 }

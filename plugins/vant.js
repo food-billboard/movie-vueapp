@@ -25,6 +25,7 @@ import {
   Picker,
   DatetimePicker,
   Checkbox,
+  CheckboxGroup,
   Toast,
   Popup,
   Col, 
@@ -39,7 +40,9 @@ import {
   Cell,
   CellGroup,
   RadioGroup,
-  Dialog
+  Dialog,
+  DropdownMenu,
+  DropdownItem,
 } from 'vant'
 
 export default {
@@ -85,5 +88,8 @@ export default {
     Vue.use(CellGroup)
     Vue.use(RadioGroup)
     Vue.use(Dialog)
+    Vue.use(DropdownItem)
+    Vue.use(DropdownMenu)
+    Vue.use(CheckboxGroup)
   }
 }
