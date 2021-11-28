@@ -78,6 +78,7 @@ export default {
         })
       },
       handleSearch(value) {
+        if(!value) return 
         this.handleClick({
           content: value 
         })
@@ -86,9 +87,7 @@ export default {
         const { listMode, ...nextValues } = value 
         if(listMode) this.listMode = listMode 
         if(Object.keys(nextValues).length) {
-          this.handleClick({
-            content: value 
-          })
+          this.handleClick(nextValues)
         }
       },
       async handleClick(params={}) {

@@ -1,15 +1,15 @@
 <template>
   <van-row>
     <van-col span="8">
-      <div class="filter-text" @click="showOrderPicker = true">{{order.name}}</div>
+      <div class="filter-text normal-title" @click="showOrderPicker = true">{{order.name}}</div>
     </van-col>
     <van-col span="8">
       <div class="filter-text">
-        <color-icon :name="iconType" @click="handleChangeType"></color-icon>
+        <color-icon class="normal-title" :name="iconType" @click="handleChangeType"></color-icon>
       </div>
     </van-col>
     <van-col span="8">
-      <div class="filter-text" @click="showFilterPicker = true">筛选</div>
+      <div class="filter-text normal-title" @click="showFilterPicker = true">筛选</div>
     </van-col>
     <van-popup v-model="showOrderPicker" round position="bottom">
       <van-picker
@@ -91,5 +91,6 @@ export default {
 <style lang="less" scoped>
   .filter-text {
     text-align: center;
+    width: 100%;
   }
 </style>

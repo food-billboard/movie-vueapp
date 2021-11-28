@@ -20,6 +20,7 @@
         </template>
       </van-field>
       <time-range-picker
+        ref="time-range-picker"
         @change="handleTimeChange"
       />
       <div class="search-filter-content-submit">
@@ -60,8 +61,12 @@ export default {
   },
   methods: {
     onSubmit() {
+      if(this.time.length === 2 && this.time.every(item => !!item) && this.time[0] > this.time[1]) {
+        this.$toast("时间范围不正确")
+        return 
+      }
       this.$emit("search", {
-        classify: this.classify,
+        classify: this.classify.join(","),
         time: this.time.join("_")
       })
     },
@@ -74,6 +79,7 @@ export default {
     onReset() {
       this.classify = []
       this.time = []
+      this.$refs["time-range-picker"].reset()
     },
     handleTimeChange(value) {
       this.time = value 
