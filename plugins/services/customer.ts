@@ -53,7 +53,7 @@ const UserServePlugin: Plugin = (context, inject) => {
       return request("/api/customer/manage/feedback/precheck", {
         method: "GET"
       })
-    }
+    },
   })
 }
 

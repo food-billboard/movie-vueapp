@@ -32,6 +32,73 @@ declare namespace API_USER {
     classify?: string 
   }
 
+  export interface IGetMovieDetailParams {
+    _id: string 
+  }
+
+  export interface IGetMovieDetailData {
+    author: {
+      username: string 
+      _id: string 
+    }
+    author_description: string 
+    author_rate: number 
+    comment: {
+      user_info: {
+        username: string 
+        avatar: string 
+        description: string 
+      }
+      content: {
+        text: string 
+      }
+      _id: string 
+    }[]
+    createdAt: string 
+    updatedAt: string 
+    glance: number 
+    hot: number 
+    images: string[] 
+    name: string 
+    poster: string 
+    rate: string 
+    same_film: {
+      name: string 
+      _id: string 
+      same_type: "SERIES" | "NAMESAKE"
+    }[]
+    store: boolean 
+    tag: {
+      text: string 
+    }[]
+    video: string 
+    _id: string 
+    info: {
+      actor: {
+        name: string 
+        other: {
+          avatar: string 
+        }
+      }[]
+      another_name: string[] 
+      classify: {
+        name: string 
+      }[]
+      description: string 
+      director: {
+        name: string
+      }[]
+      district: {
+        name: string
+      }[]
+      language: {
+        name: string
+      }[]
+      name: string 
+      screen_time: string 
+    }
+  }
+
   export interface IGetSearchListData {
     _id: string 
     glance: number 

@@ -121,6 +121,13 @@ const UserServePlugin: Plugin = (context, inject) => {
       return request("/api/user/movie/order", {
         method: "GET",
       })
+    },
+    // 电影详情  
+    getMovieDetail(params: API_USER.IGetMovieDetailParams) {
+      return request("/api/user/movie/detail", {
+        method: "GET",
+        params 
+      })
     }
   })
 }
