@@ -68,16 +68,17 @@ export default {
       init: false
     }) {
       if(init) this.userList = []
-      const { query: { id } } = this.$route
+      const { query: { id, isMine } } = this.$route
       const data = await this.fetchDataMethod({
         currPage,
         pageSize,
         _id: id,
         ...nextParams
       })
-      const realValue = Array.isArray(data) ? data : data.attentions || []
+      let realValue = (Array.isArray(data) ? data : data.attentions || [])
+      if(isMine) realValue = realValue.map(item => ({ ...item, attention: true }))
       this.userList = realValue 
-      return data 
+      return realValue 
     }
   },
 }

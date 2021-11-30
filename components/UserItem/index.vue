@@ -16,7 +16,7 @@
       </template>
     </van-cell>
     <template v-if="needAction" #right>
-      <van-button v-if="value.isMine" class="action-button" square type="danger" text="取消关注" />
+      <van-button v-if="!!value.attention" class="action-button" square type="danger" text="取消关注" />
       <van-button v-else square class="action-button" type="primary" text="关注" />
     </template>
   </van-swipe-cell>
