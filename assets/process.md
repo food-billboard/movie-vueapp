@@ -17,7 +17,8 @@
 2. 列表形式电影列表 `/components/ListMovie`  
 3. 懒加载列表  `/components/List`  
 4. 文件上传  `/components/ChunkUpload`  
-5. 评论组件 `/components/Comment`
+5. 评论组件 `/components/Comment`  
+6. 用户列表组件 `/components/UserItem`  
 
 ## 首页 
 - 路由  
@@ -68,4 +69,9 @@
 ## 搜索页面  
 - 数据搜索页面  
 /search  
+- 是否完成: 是  
+
+## 关注用户页面  
+- 关注用户页面，目前只验证了自己的关注  
+/attentions  
 - 是否完成: 是  
