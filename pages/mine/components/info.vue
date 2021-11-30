@@ -88,7 +88,10 @@ export default {
         {
           title: "关注",
           icon: "like",
-          router: "/attentions"
+          router: "/attentions",
+          query: {
+            isMine: true,
+          }
         },
         {
           title: "Wo的评论",
@@ -103,7 +106,10 @@ export default {
         {
           title: "粉丝",
           icon: "friends",
-          router: "/fans"
+          router: "/fans",
+          query: {
+            isMine: true,
+          }
         },
       ]
     },

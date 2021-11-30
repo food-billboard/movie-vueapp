@@ -121,6 +121,13 @@ const UserServePlugin: Plugin = (context, inject) => {
       return request("/api/user/movie/order", {
         method: "GET",
       })
+    },
+    // 用户关注
+    getAttentions(params: API_USER.IGetAttentionsParams) {
+      return request("/api/user/customer/attention", {
+        method: "GET",
+        params
+      })
     }
   })
 }

@@ -32,6 +32,19 @@ declare namespace API_USER {
     classify?: string 
   }
 
+  export interface IGetAttentionsParams {
+    _id: string 
+    currPage?: number 
+    pageSize?: number 
+  }
+
+  export interface IGetAttentionData {
+    _id: string 
+    username: string
+    description: string 
+    avatar: string 
+  }
+
   export interface IGetSearchListData {
     _id: string 
     glance: number 
@@ -218,6 +231,18 @@ declare namespace API_CUSTOMER {
       image?: string[]
       video?: string[]
     }
+  }
+
+  export interface IGetSelfAttentionParams {
+    currPage?: number 
+    pageSize?: number 
+  }
+
+  export interface IGetSelfAttentionData {
+    _id: string 
+    username: string
+    description: string 
+    avatar: string 
   }
 
 }

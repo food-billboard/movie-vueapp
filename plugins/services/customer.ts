@@ -53,6 +53,20 @@ const UserServePlugin: Plugin = (context, inject) => {
       return request("/api/customer/manage/feedback/precheck", {
         method: "GET"
       })
+    },
+    // 获取本人关注
+    getSelfCustomer(params: API_CUSTOMER.IGetSelfAttentionParams) {
+      return request("/api/customer/manage/attention", {
+        method: "GET",
+        params
+      })
+    },
+    // 获取用户关注
+    getCustomerAttention(params: API_CUSTOMER.IGetSelfAttentionParams) {
+      return request("/api/customer/user/attention", {
+        method: "GET",
+        params
+      })
     }
   })
 }
