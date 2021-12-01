@@ -128,6 +128,13 @@ const UserServePlugin: Plugin = (context, inject) => {
         method: "GET",
         params
       })
+    },
+    // 用户粉丝
+    getFans(params: API_USER.IGetAttentionsParams) {
+      return request("/api/user/customer/fans", {
+        method: "GET",
+        params
+      })
     }
   })
 }

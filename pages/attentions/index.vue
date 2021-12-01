@@ -9,6 +9,7 @@
         v-for="item in userList"
         :key="item._id"
         :value="item"
+        @refresh="handleClick"
       />
     </loading-list>
   </div>
@@ -41,7 +42,7 @@ export default {
     fetchDataMethod() {
       const { query: { isMine } } = this.$route
       const isLogin = this.$isLogin(this)
-      return isMine ? this.$API_CUSTOMER.getSelfCustomer : (isLogin ? this.$API_CUSTOMER.getCustomerAttention : this.$API_USER.getAttentions)
+      return isMine ? this.$API_CUSTOMER.getSelfCustomerAttentions : (isLogin ? this.$API_CUSTOMER.getCustomerAttention : this.$API_USER.getAttentions)
     }
   },
   methods: {

@@ -55,7 +55,7 @@ const UserServePlugin: Plugin = (context, inject) => {
       })
     },
     // 获取本人关注
-    getSelfCustomer(params: API_CUSTOMER.IGetSelfAttentionParams) {
+    getSelfCustomerAttentions(params: API_CUSTOMER.IGetSelfAttentionParams) {
       return request("/api/customer/manage/attention", {
         method: "GET",
         params
@@ -65,6 +65,34 @@ const UserServePlugin: Plugin = (context, inject) => {
     getCustomerAttention(params: API_CUSTOMER.IGetSelfAttentionParams) {
       return request("/api/customer/user/attention", {
         method: "GET",
+        params
+      })
+    },
+    // 获取本人粉丝
+    getSelfCustomerFans(params: API_CUSTOMER.IGetSelfAttentionParams) {
+      return request("/api/customer/manage/fans", {
+        method: "GET",
+        params
+      })
+    },
+    // 获取用户粉丝
+    getCustomerFans(params: API_CUSTOMER.IGetSelfAttentionParams) {
+      return request("/api/customer/user/fans", {
+        method: "GET",
+        params
+      })
+    },
+    // 关注用户
+    putUserAttention(data: { _id: string }) {
+      return request("/api/customer/manage/attention", {
+        method: "PUT",
+        data
+      })
+    },
+    // 取消关注用户
+    deleteUserAttention(params: { _id: string }) {
+      return request("/api/customer/manage/attention", {
+        method: "DELETE",
         params
       })
     }
