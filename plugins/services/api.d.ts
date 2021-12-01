@@ -45,6 +45,18 @@ declare namespace API_USER {
     avatar: string 
   }
 
+  export interface IGetBrowserListData {
+    description: string 
+    name: string
+    poster: string 
+    _id: string 
+    store: boolean 
+    rate: number 
+    classify: { name: string }[]
+    publish_time: string 
+    hot: number 
+  }
+
   export interface IGetSearchListData {
     _id: string 
     glance: number 
@@ -245,6 +257,10 @@ declare namespace API_CUSTOMER {
     avatar: string 
   }
 
+  export interface IGetSelfBrowserListData extends API_USER.IGetBrowserListData {}
+
+  export interface IGetBrowserListData extends API_USER.IGetBrowserListData {}
+
 }
 
 declare namespace API_MEDIA {
@@ -259,3 +275,4 @@ declare namespace API_MEDIA {
   }
 
 }
+

@@ -105,7 +105,11 @@ export default {
 
     },
     async fetchStore() {
-      const { _id } = this.value 
+      const { _id, store } = this.value 
+      if(typeof store !== "undefined") {
+        this.isStore = store 
+        return 
+      }
       const data = await this.$API_CUSTOMER.getMovieDetail({
         _id
       })

@@ -101,7 +101,10 @@ export default {
         {
           title: "浏览记录",
           icon: "todo-list",
-          router: "/browser"
+          router: "/browser",
+          query: {
+            isMine: true 
+          }
         },
         {
           title: "粉丝",

@@ -135,6 +135,13 @@ const UserServePlugin: Plugin = (context, inject) => {
         method: "GET",
         params
       })
+    },
+    // 用户浏览
+    getBrowserList(params: API_USER.IGetAttentionsParams) {
+      return request("/api/user/customer/browser", {
+        method: "GET",
+        params
+      })
     }
   })
 }

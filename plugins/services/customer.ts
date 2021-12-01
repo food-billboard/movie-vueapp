@@ -62,7 +62,7 @@ const UserServePlugin: Plugin = (context, inject) => {
       })
     },
     // 获取用户关注
-    getCustomerAttention(params: API_CUSTOMER.IGetSelfAttentionParams) {
+    getCustomerAttention(params: API_CUSTOMER.IGetSelfAttentionParams & { _id: string }) {
       return request("/api/customer/user/attention", {
         method: "GET",
         params
@@ -76,7 +76,7 @@ const UserServePlugin: Plugin = (context, inject) => {
       })
     },
     // 获取用户粉丝
-    getCustomerFans(params: API_CUSTOMER.IGetSelfAttentionParams) {
+    getCustomerFans(params: API_CUSTOMER.IGetSelfAttentionParams & { _id: string }) {
       return request("/api/customer/user/fans", {
         method: "GET",
         params
@@ -95,7 +95,21 @@ const UserServePlugin: Plugin = (context, inject) => {
         method: "DELETE",
         params
       })
-    }
+    },
+    // 个人浏览记录
+    getSelfBrowser(params: API_CUSTOMER.IGetSelfAttentionParams) {
+      return request("/api/customer/manage/movie/browser", {
+        method: "GET",
+        params
+      })
+    },
+    // 用户浏览记录
+    getUserBrowser(params: API_CUSTOMER.IGetSelfAttentionParams & { _id: string }) {
+      return request("/api/customer/user/movie/browser", {
+        method: "GET",
+        params
+      })
+    },
   })
 }
 

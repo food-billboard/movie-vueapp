@@ -13,7 +13,7 @@
     <footer>
       <van-tabbar v-model="activeBar" @change="handleChange">
         <van-tabbar-item icon="home-o">首页</van-tabbar-item>
-        <van-tabbar-item icon="search">我的</van-tabbar-item>
+        <van-tabbar-item icon="user-o">我的</van-tabbar-item>
       </van-tabbar>
     </footer>
   </div>
