@@ -163,6 +163,20 @@ const UserServePlugin: Plugin = (context, inject) => {
         method: "GET",
         params
       })
+    },
+    // 电影详情 简易
+    getMovieDetailSimple(params: { _id: string }) {
+      return request("/api/user/movie/detail/simple", {
+        method: "GET",
+        params
+      })
+    },
+    // 电影评论
+    getMovieComment(params: API_USER.IGetAttentionsParams) {
+      return request("/api/user/movie/detail/comment/list", {
+        method: "GET",
+        params
+      })
     }
   })
 }

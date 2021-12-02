@@ -52,15 +52,6 @@ export default {
     }
   },
   methods: {
-    handleGetDetail(target) {
-      const { _id } = target 
-      this.$router.push({
-        path: "/detail",
-        query: {
-          id: _id 
-        }
-      })
-    },
     handleEdit(target) {
       const { _id } = target 
       this.$router.push({

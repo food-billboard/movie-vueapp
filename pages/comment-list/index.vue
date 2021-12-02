@@ -1,10 +1,15 @@
 <template>
-  <div class="page-store">
+  <div class="page-comment-list">
+    <van-sticky>
+      <comment-header
+        :value="movieData"
+      />
+    </van-sticky>
     <loading-list
       ref="loading-list"
       :fetch-data="fetchData"
     >
-      <list-movie
+      <comment-item
         v-for="item in list"
         :key="item._id"
         :value="item"
@@ -14,34 +19,31 @@
   </div>
 </template>
 <script>
-import List from '@/components/List'
-import ListMovie from '@/components/ListMovie'
+import CommentHeader from './components/header.vue'
+import LoadingList from '@/components/List'
+import CommentItem from '@/components/CommentItem'
 export default {
   components: {
-    LoadingList: List,
-    ListMovie
+    CommentHeader,
+    LoadingList,
+    CommentItem
   },
-  asyncData({ app, route, redirect }) {
-    const { query: { isMine=false } }  = route
-    const isLogin = !!app.store.state.user.userInfo
-    if(isMine && !isLogin) {
-      redirect({
-        path: "/login"
-      })
-      return {}
+  async asyncData({ app, route }) {
+    const { query: { id } } = route
+    const movieData = await app.$API_USER.getMovieDetailSimple({ _id: id })
+    return {
+      movieData
     }
-    return {}
   },
   data() {
     return {
-      list: []
+      movieData: {}
     }
   },
   computed: {
     fetchDataMethod() {
-      const { query: { isMine } } = this.$route
       const isLogin = this.$isLogin(this)
-      return isMine ? this.$API_CUSTOMER.getSelfStore : (isLogin ? this.$API_CUSTOMER.getUserStore : this.$API_USER.getStoreList)
+      return isLogin ? this.$API_CUSTOMER.getMovieComment : this.$API_USER.getMovieComment
     }
   },
   methods: {
@@ -59,24 +61,23 @@ export default {
       init: false
     }) {
       if(init) this.list = []
-      const { query: { id, isMine } } = this.$route
+      const { query: { id } } = this.$route
       const data = await this.fetchDataMethod({
         currPage,
         pageSize,
         _id: id,
         ...nextParams
       })
-      let realValue = (Array.isArray(data) ? data : data.store || [])
-      if(isMine) realValue = realValue.map(item => ({ ...item, store: true }))
+      const realValue = (Array.isArray(data) ? data : data.comment || [])
       this.list = realValue 
       return realValue 
     }
-  },
+  }
 }
 </script>
 <style lang="less" scoped>
-  .page-store {
-    width: 100vw;
+  .page-comment-list {
+    width: 100%;
     min-height: 100vh;
   }
 </style>

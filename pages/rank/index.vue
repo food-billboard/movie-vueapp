@@ -52,15 +52,6 @@
       }
     },
     methods: {
-      handleGetDetail(target) {
-        const { _id } = target 
-        this.$router.push({
-          path: "/detail",
-          query: {
-            id: _id 
-          }
-        })
-      },
       async handleClick(target) {
         const { _id } = target
         this.currentRank = _id 

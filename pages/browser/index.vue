@@ -45,15 +45,6 @@ export default {
     }
   },
   methods: {
-    handleGetDetail(target) {
-      const { _id } = target 
-      this.$router.push({
-        path: "/detail",
-        query: {
-          id: _id 
-        }
-      })
-    },
     async handleClick() {
       await this.$refs["loading-list"].onRefresh()
     },

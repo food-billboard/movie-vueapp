@@ -169,6 +169,39 @@ declare namespace API_USER {
     like: boolean 
   }
 
+  export interface IGetMovieDetailSimple {
+    description: string 
+    name: string 
+    poster: string 
+    _id: string 
+  }
+
+  export interface IGetMovieCommentData {
+    comment_users: {
+      avatar: string 
+      username: string
+      _id: string 
+    }[]
+    content: {
+      images: string[]
+      video: {
+        src: string 
+        poster: string 
+      }[]
+      text: string 
+    }
+    createdAt: string
+    updatedAt: string 
+    like: boolean 
+    total_like: number 
+    _id: string 
+    user_info: {
+      _id: string 
+      avatar: string 
+      username: string 
+    }
+  }
+
 }
 
 declare namespace API_UPLOAD {
