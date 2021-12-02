@@ -138,6 +138,13 @@ const UserServePlugin: Plugin = (context, inject) => {
         params
       })
     },
+    // 用户信息
+    getAnotherUserInfo(params: { _id: string }) {
+      return request("/api/customer/user", {
+        method: "GET",
+        params
+      })
+    },
   })
 }
 

@@ -36,10 +36,15 @@ export default {
   mixins: [
     layoutMixin
   ],
+  props: {
+    value: {
+      type: Object,
+      default() {
+        return {}
+      }
+    }
+  },
   computed: {
-    value() {
-      return this.$store.state.user.userInfo || {}
-    },
     info() {
       return [
         {

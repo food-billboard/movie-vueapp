@@ -156,6 +156,19 @@ declare namespace API_USER {
     type: "forget" | "register"
   }
 
+  export interface IGetAnotherUserInfo {
+    _id: string 
+    hot: number 
+    attentions: number 
+    avatar: string 
+    description: string 
+    fans: number 
+    username: string 
+    createdAt: string 
+    updatedAt: string 
+    like: boolean 
+  }
+
 }
 
 declare namespace API_UPLOAD {
@@ -228,6 +241,13 @@ declare namespace API_UPLOAD {
 }
 
 declare namespace API_CUSTOMER {
+
+  export interface IGetCustomerUserInfo extends Omit<API_USER.IGetAnotherUserInfo, "like"> {
+    friend_id: string 
+    friends: number 
+    mobile: number
+    email: string 
+  }
 
   export interface IGetMovieDetailParams {
     _id: string 
