@@ -12,7 +12,6 @@
     <search-list
       v-if="listMode === 'list'"
       ref="loading-list"
-      class="rank-list"
       :fetch-data="fetchData"
       :refresh="handleClick"
       :immediate-check="false"
@@ -26,7 +25,6 @@
     <search-list
       v-if="listMode === 'card'"
       ref="loading-list"
-      class="rank-list"
       :fetch-data="fetchData"
       :refresh="handleClick"
       :immediate-check="false"

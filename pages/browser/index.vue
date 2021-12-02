@@ -1,14 +1,14 @@
 <template>
-  <div class="page-attentions">
+  <div class="page-browser">
     <loading-list
       ref="loading-list"
       :fetch-data="fetchData"
-      :refresh="handleClick"
     >
       <list-movie
         v-for="item in list"
         :key="item._id"
         :value="item"
+        @refresh="handleClick"
       />
     </loading-list>
   </div>
@@ -68,15 +68,14 @@ export default {
       init: false
     }) {
       if(init) this.list = []
-      const { query: { id, isMine } } = this.$route
+      const { query: { id } } = this.$route
       const data = await this.fetchDataMethod({
         currPage,
         pageSize,
         _id: id,
         ...nextParams
       })
-      let realValue = (Array.isArray(data) ? data : data.glance || [])
-      if(isMine) realValue = realValue.map(item => ({ ...item, store: true }))
+      const realValue = (Array.isArray(data) ? data : data.glance || [])
       this.list = realValue 
       return realValue 
     }
@@ -84,7 +83,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-  .page-attentions {
+  .page-browser {
     width: 100vw;
     min-height: 100vh;
   }

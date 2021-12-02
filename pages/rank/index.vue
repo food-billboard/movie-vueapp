@@ -12,12 +12,12 @@
       ref="loading-list"
       class="rank-list"
       :fetch-data="fetchData"
-      :refresh="handleClick.bind(this, currentRank)"
     >
       <list-item
         v-for="item in rankList"
         :key="item.id"
         :value="item"
+        @refresh="handleClick.bind(this, currentRank)"
       />
     </loading-list>
   </div>

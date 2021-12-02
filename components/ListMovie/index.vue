@@ -26,6 +26,7 @@
           收藏
           <van-icon :name="storeName" :color="storeColor" />
         </div>
+        <slot name="action"></slot>
       </div>
     </div>
     <div :class="['movie-list-item-description ellipsis', 'background-color', 'disabled']">
@@ -100,7 +101,7 @@ export default {
         if(err) {
           this.$toast("出问题了")
         }
-        this.refresh()
+        this.$emit("refresh")
       }
 
     },
@@ -154,6 +155,8 @@ export default {
       display: flex;
       align-items: center;
       margin: @normal-margin / 2 0;
+      flex-direction: column;
+      justify-content: space-evenly;
       &-item {
         font-size: @sub-title-font-size;
       }

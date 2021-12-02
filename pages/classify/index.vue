@@ -8,12 +8,12 @@
     <loading-list
       ref="loading-list"
       :fetch-data="fetchData"
-      :refresh="handleClick.bind(this, currentClassify)"
     >
       <list-item
         v-for="item in classify"
         :key="item.id"
         :value="item"
+        @refresh="handleClick.bind(this, currentClassify)"
       />
     </loading-list>
   </div>

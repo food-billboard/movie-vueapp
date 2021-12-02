@@ -142,6 +142,20 @@ const UserServePlugin: Plugin = (context, inject) => {
         method: "GET",
         params
       })
+    },
+    // 用户收藏
+    getStoreList(params: API_USER.IGetAttentionsParams) {
+      return request("/api/user/customer/store", {
+        method: "GET",
+        params
+      })
+    },
+    // 用户发布
+    getIssueList(params: API_USER.IGetAttentionsParams) {
+      return request("/api/user/customer/movie", {
+        method: "GET",
+        params
+      })
     }
   })
 }

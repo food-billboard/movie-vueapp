@@ -74,12 +74,15 @@ export default {
         {
           title: "收藏",
           icon: "star",
-          router: "/store"
+          router: "/store",
+          query: {
+            isMine: true 
+          }
         },
         {
           title: "发布",
           icon: "share",
-          router: "/issue"
+          router: "/issue",
         }
       ]
     },
@@ -123,7 +126,7 @@ export default {
           icon: "coupon",
           router: "/issue-list",
           query: {
-            id: this.value._id 
+            isMine: true 
           }
         },
         {

@@ -110,6 +110,34 @@ const UserServePlugin: Plugin = (context, inject) => {
         params
       })
     },
+    // 用户收藏
+    getUserStore(params: API_CUSTOMER.IGetSelfAttentionParams & { _id: string }) {
+      return request("/api/customer/user/movie/store", {
+        method: "GET",
+        params
+      })
+    },
+    // 个人收藏
+    getSelfStore(params: API_CUSTOMER.IGetSelfAttentionParams) {
+      return request("/api/customer/manage/movie/store", {
+        method: "GET",
+        params
+      })
+    },
+    // 用户发布
+    getUserIssue(params: API_CUSTOMER.IGetSelfAttentionParams & { _id: string }) {
+      return request("/api/customer/user/movie/issue", {
+        method: "GET",
+        params
+      })
+    },
+    // 个人发布
+    getSelfIssue(params: API_CUSTOMER.IGetSelfAttentionParams) {
+      return request("/api/customer/manage/movie", {
+        method: "GET",
+        params
+      })
+    },
   })
 }
 
