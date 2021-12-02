@@ -1,9 +1,9 @@
 <template>
-  <div class="page-feedback">
+  <div class="page-comment">
     <comment
       @submit="handleSubmit"
     >
-      发送反馈
+      发送评论
     </comment>
   </div>
 </template>
@@ -15,16 +15,14 @@ export default {
   },
   methods: {
     async handleSubmit(target) {
-      const result = await this.$API_CUSTOMER.feedbackCheck()
-      if(!result) {
-        this.$toast("超过每日反馈数量")
-        return 
-      }
-      await this.$API_CUSTOMER.postFeedback({
+      const { query: { id, type } } = this.$route
+      const method = type === "comment" ? this.$API_CUSTOMER.postComment : this.$API_CUSTOMER.postMovieComment
+      await method({
+        _id: id,
         content: target
       })
       this.$toast({
-        message: "反馈成功",
+        message: "评论成功",
         onClose: () => {
           this.$router.go(-1)
         },
@@ -36,7 +34,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-  .page-feedback {
+  .page-comment {
     width: 100%;
     min-height: 100vh;
   }

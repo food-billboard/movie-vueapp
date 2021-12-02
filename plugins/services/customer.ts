@@ -145,6 +145,20 @@ const UserServePlugin: Plugin = (context, inject) => {
         params
       })
     },
+    // 发送电影评论
+    postMovieComment(data: API_CUSTOMER.IPostCommentParams) {
+      return request("/api/customer/movie/detail/comment/movie", {
+        method: "POST",
+        data
+      })
+    },
+    // 发送评论
+    postComment(data: API_CUSTOMER.IPostCommentParams) {
+      return request("/api/customer/movie/detail/comment", {
+        method: "POST",
+        data
+      })
+    }
   })
 }
 

@@ -281,6 +281,15 @@ declare namespace API_CUSTOMER {
 
   export interface IGetBrowserListData extends API_USER.IGetBrowserListData {}
 
+  export interface IPostCommentParams {
+    _id: string 
+    content: {
+      image: string[]
+      video: string[]
+      text: string 
+    }
+  }
+
 }
 
 declare namespace API_MEDIA {
