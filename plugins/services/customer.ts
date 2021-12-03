@@ -165,6 +165,20 @@ const UserServePlugin: Plugin = (context, inject) => {
         method: "GET",
         params
       })
+    },
+    // 点赞评论
+    putMovieCommentLike(data: { _id: string }) {
+      return request("/api/customer/movie/detail/comment/like", {
+        method: "PUT",
+        data
+      })
+    },
+    // 取消点赞评论
+    deleteMovieCommentLike(params: { _id: string }) {
+      return request("/api/customer/movie/detail/comment/like", {
+        method: "DELETE",
+        params
+      })
     }
   })
 }

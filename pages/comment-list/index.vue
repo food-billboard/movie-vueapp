@@ -37,7 +37,8 @@ export default {
   },
   data() {
     return {
-      movieData: {}
+      movieData: {},
+      list: []
     }
   },
   computed: {

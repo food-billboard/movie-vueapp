@@ -103,8 +103,9 @@ export default {
       &-description {
         border: 1px dashed rgba(0, 0, 0, .2);
         font-size: @normal-font-size;
-        padding: 1PX;
+        padding: 4PX;
         width: 100%;
+        display: block;
       }
     }
   }
