@@ -18,7 +18,7 @@
         </div>
       </div>
       <div class="comment-item-header-like">
-        <span class="comment-item-header-like-count">{{$number(value.total_like || 0)}}</span>
+        <span class="comment-item-header-like-count">{{$number(likeCount || 0)}}</span>
         <color-icon :name="iconName" @click="handleLike" />
       </div>
     </div>
@@ -85,7 +85,8 @@ export default {
   },
   data() {
     return {
-      like: false 
+      like: !!this.value.like,
+      likeCount: this.value.total_like || 0,
     }
   },
   computed: {
@@ -121,6 +122,9 @@ export default {
         if(newValue.like !== oldValue.like) {
           this.like = newValue.like 
         }
+        if(newValue.total_like !== oldValue.total_like) {
+          this.likeCount = newValue.total_like
+        }
       },
       deep: true 
     }
@@ -132,6 +136,7 @@ export default {
           const method = this.value.like ? this.$API_CUSTOMER.deleteMovieCommentLike : this.$API_CUSTOMER.putMovieCommentLike
           await method({ _id: this.value._id })
           this.like = !this.like 
+          this.likeCount += (this.like ? 1 : -1)
         }
       })
     },
@@ -161,8 +166,10 @@ export default {
         startPosition: index
       }) 
     },
-    handlePreviewVideo() {
-
+    handlePreviewVideo(target) {
+      this.$videoPreview({
+        src: target.videoSrc
+      })
     }
   }
 }

@@ -161,7 +161,7 @@ const UserServePlugin: Plugin = (context, inject) => {
     },
     // 用户评论
     getMovieComment(params: API_USER.IGetAttentionsParams) {
-      return request("/api/user/movie/detail/comment/list", {
+      return request("/api/customer/movie/detail/comment", {
         method: "GET",
         params
       })
