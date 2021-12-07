@@ -19,6 +19,9 @@
 4. 文件上传  `/components/ChunkUpload`  
 5. 评论组件 `/components/Comment`  
 6. 用户列表组件 `/components/UserItem`  
+7. 评论列表组件 `/components/CommentItem`  
+8. 视频预览组件 `/components/VideoPreview`  
+暂时只是mock，具体功能还未完成，但是调用方法是固定的  
 
 ## 首页 
 - 路由  
@@ -104,4 +107,9 @@
 ## 评论页面  
 - 评论  
 /comment     
+- 是否完成: 是  
+
+## 电影评论列表页面
+- 评论列表页面  
+/comment-list  
 - 是否完成: 是  
