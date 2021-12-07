@@ -1,13 +1,11 @@
 <template>
-  <div class="page-comment-list">
-    <van-sticky>
-      <comment-header
-        :value="movieData"
-      />
-    </van-sticky>
+  <div class="page-comment-detail">
+    <comment-header
+      :value="commentData"
+    />
     <loading-list
       ref="loading-list"
-      class="page-comment-list-content"
+      class="page-comment-detail-content"
       :fetch-data="fetchData"
     >
       <comment-item
@@ -32,33 +30,35 @@ export default {
   },
   async asyncData({ app, route }) {
     const { query: { id } } = route
-    const movieData = await app.$API_USER.getMovieDetailSimple({ _id: id })
+    const isLogin = !!app.store.state.user.userInfo
+    const method = isLogin ? app.$API_CUSTOMER.getCommentDetail : app.$API_USER.getCommentDetail
+    const commentData = await method({ _id: id, currPage: 0, pageSize: 1 }) || {}
     return {
-      movieData
+      commentData: commentData.comment || {}
     }
   },
   data() {
     return {
-      movieData: {},
+      commentData: {},
       list: []
     }
   },
   computed: {
     fetchDataMethod() {
       const isLogin = this.$isLogin(this)
-      return isLogin ? this.$API_CUSTOMER.getMovieComment : this.$API_USER.getMovieComment
+      return isLogin ? this.$API_CUSTOMER.getCommentDetail : this.$API_USER.getCommentDetail
     }
   },
   methods: {
     async handleClick() {
       await this.$refs["loading-list"].onRefresh()
     },
-    handleComment() {
+        handleComment() {
       this.$router.push({
         path: "comment",
         query: {
-          id: this.movieData._id,
-          type: "movie"
+          id: this.commentData._id,
+          type: "comment"
         }
       })
     },
@@ -80,7 +80,7 @@ export default {
         _id: id,
         ...nextParams
       })
-      const realValue = (Array.isArray(data) ? data : data.comment || [])
+      const realValue = (Array.isArray(data) ? data : data.sub || [])
       this.list = realValue 
       return realValue 
     }
@@ -88,7 +88,7 @@ export default {
 }
 </script>
 <style lang="less" scoped>
-  .page-comment-list {
+  .page-comment-detail {
     width: 100%;
     min-height: 100vh;
     &-content {

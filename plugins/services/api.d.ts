@@ -202,6 +202,11 @@ declare namespace API_USER {
     }
   }
 
+  export interface IGetCommentDetailData {
+    comment: IGetMovieCommentData,
+    sub: IGetMovieCommentData[]
+  }
+
 }
 
 declare namespace API_UPLOAD {
@@ -321,6 +326,11 @@ declare namespace API_CUSTOMER {
       video: string[]
       text: string 
     }
+  }
+
+  export interface IGetCommentDetailData {
+    comment: API_USER.IGetMovieCommentData,
+    sub: API_USER.IGetMovieCommentData[]
   }
 
 }

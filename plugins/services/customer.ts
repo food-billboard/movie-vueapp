@@ -179,6 +179,13 @@ const UserServePlugin: Plugin = (context, inject) => {
         method: "DELETE",
         params
       })
+    },
+    // 评论详情
+    getCommentDetail(params: API_USER.IGetAttentionsParams) {
+      return request("/api/customer/movie/detail/comment/detail", {
+        method: "GET",
+        params
+      })
     }
   })
 }

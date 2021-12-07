@@ -1,16 +1,19 @@
 <template>
-  <div class="comment-item">
+  <div 
+    :class="['comment-item', 'background-color', realColorClass, 'thirdly']"
+    @click="handleToDetailComment"
+  >
     <div class="comment-item-header">
       <van-image
         round
         width="1rem"
         height="1rem"
         :src="value.user_info.avatar"
-        @click="handleGetDetail(value.user_info._id)"
+        @click="handleGetDetail.stop(value.user_info._id)"
       />
       <div class="comment-item-header-title normal-title">
         <div :class="['color', 'primary', 'comment-item-header-title-main', 'normal-title', realColorClass]">
-          <div class="van-ellipsis" @click="handleComment">{{value.user_info.username || ""}}</div>
+          <div class="van-ellipsis" @click.stop="handleComment">{{value.user_info.username || ""}}</div>
           <span>说: </span>
         </div>
         <div>
@@ -19,7 +22,7 @@
       </div>
       <div class="comment-item-header-like">
         <span class="comment-item-header-like-count">{{$number(likeCount || 0)}}</span>
-        <color-icon :name="iconName" @click="handleLike" />
+        <color-icon :name="iconName" @click.stop="handleLike" />
       </div>
     </div>
     <div class="comment-item-content">
@@ -43,13 +46,13 @@
               class="comment-item-content-image-item"
               fit="contain"
               :src="item.src"
-              @click="handlePreview(index)"
+              @click.stop="handlePreview(index)"
             />
           </van-col>
         </van-row>
       </div>
     </div>
-    <div class="comment-item-footer">
+    <div v-if="footer" class="comment-item-footer">
       <van-image
         v-for="item in userList"
         :key="item._id"
@@ -57,7 +60,7 @@
         height="10vw"
         :src="item.avatar"
         round
-        @click="handleGetDetail(item._id)"
+        @click.stop="handleGetDetail(item._id)"
       />
     </div>
   </div>
@@ -82,6 +85,18 @@ export default {
           }
         }
       }
+    },
+    footer: {
+      type: Boolean,
+      default: true 
+    },
+    commentSelf: {
+      type: Boolean,
+      default: true 
+    },
+    commentDetail: {
+      type: Boolean,
+      default: true 
     }
   },
   data() {
@@ -141,6 +156,15 @@ export default {
         }
       })
     },
+    handleToDetailComment() {
+      if(!this.commentDetail) return 
+      this.$router.push({
+        path: "/comment-detail",
+        query: {
+          id: this.value._id,
+        }
+      })
+    },
     handleGetDetail(userId) {
       this.$router.push({
         path: "/user",
@@ -150,6 +174,7 @@ export default {
       })
     },
     handleComment() {
+      if(!this.commentSelf) return 
       this.$router.push({
         path: "/comment",
         query: {
@@ -181,6 +206,7 @@ export default {
   @import url("/assets/global.less");
   .comment-item {
     width: 100%;
+    margin-bottom: @normal-margin;
     &-header {
       display: flex;
       width: 100%;
