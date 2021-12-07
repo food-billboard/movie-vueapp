@@ -186,6 +186,13 @@ const UserServePlugin: Plugin = (context, inject) => {
         method: "GET",
         params
       })
+    },
+    // 我的评论
+    getSelfCommentList(params: { currPage?: number, pageSize?: number }) {
+      return request("/api/customer/manage/comment", {
+        method: "GET",
+        params
+      })
     }
   })
 }
