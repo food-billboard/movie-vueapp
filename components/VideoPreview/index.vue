@@ -1,5 +1,5 @@
 <template>
-  <div class="video-preview" @dblclick.stop="handleClose">
+  <div id="video-preview" @click.stop="dbClick">
     <!-- <video
       
     /> -->
@@ -10,7 +10,10 @@
 export default {
   data() {
     return {
-      visible: true 
+      visible: true,
+      videos: [],
+      startPosition: 0,
+      times: -1
     }
   },
   watch: {
@@ -30,11 +33,21 @@ export default {
     setVisible(visible) {
       this.visible = visible
     },
+    dbClick() {
+      const now = Date.now()
+      // 双击
+      if(now - this.times < 300) {
+        this.handleClose()
+        this.times = -1 
+      }else {
+        this.times = now 
+      }
+    }
   }
 }
 </script>
 <style lang="less" scoped>
-  .video-preview {
+  #video-preview {
     width: 100%;
     height: 100vh;
     overflow: hidden;
@@ -42,7 +55,7 @@ export default {
     position: fixed;
     top: 0;
     left: 0;
-    &-content {
+    .video-preview-content {
       width: 100%;
       height: 40vh;
       position: absolute;

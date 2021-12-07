@@ -6,7 +6,7 @@
         width="1rem"
         height="1rem"
         :src="value.user_info.avatar"
-        @click="handleGetDetail"
+        @click="handleGetDetail(value.user_info._id)"
       />
       <div class="comment-item-header-title normal-title">
         <div :class="['color', 'primary', 'comment-item-header-title-main', 'normal-title', realColorClass]">
@@ -57,6 +57,7 @@
         height="10vw"
         :src="item.avatar"
         round
+        @click="handleGetDetail(item._id)"
       />
     </div>
   </div>
@@ -140,11 +141,11 @@ export default {
         }
       })
     },
-    handleGetDetail() {
+    handleGetDetail(userId) {
       this.$router.push({
         path: "/user",
         query: {
-          id: this.value.user_info._id 
+          id: userId
         }
       })
     },
@@ -153,22 +154,24 @@ export default {
         path: "/comment",
         query: {
           id: this.value._id,
-          type: "movie"
+          type: "comment"
         }
       })
     },
     handlePreview(index) {
       const target = this.imageList[index]
       const { isImage } = target
-      if(!isImage) return this.handlePreviewVideo(target)
+      if(!isImage) return this.handlePreviewVideo(index)
       ImagePreview({
         images: this.value.content.image || [],
         startPosition: index
       }) 
     },
-    handlePreviewVideo(target) {
+    handlePreviewVideo(index) {
+      const realIndex = index - this.value.content.image.length 
       this.$videoPreview({
-        src: target.videoSrc
+        videos: this.value.content.video || [],
+        startPosition: realIndex
       })
     }
   }

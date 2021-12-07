@@ -10,7 +10,8 @@ const VideoPreviewModal = (config) => {
   })
   document.body.appendChild(modalDom.$el)
 
-  modalDom.src = config.src 
+  modalDom.videos = config.videos || []
+  modalDom.startPosition = config.startPosition || 0
 
   // 弹框三个事件
   modalDom.globalClose = config.onClose || null 
