@@ -184,7 +184,35 @@ const UserServePlugin: Plugin = (context, inject) => {
         method: "GET",
         params
       })
-    }
+    },
+    // 演员列表
+    getActorList(params: { count?: number }) {
+      return request("/api/user/movie/actor", {
+        method: "GET",
+        params
+      })
+    },
+     // 导演列表
+     getDirectorList(params: { count?: number }) {
+      return request("/api/user/movie/director", {
+        method: "GET",
+        params
+      })
+    },
+     // 地区列表
+     getDistrictList(params: { count?: number }) {
+      return request("/api/user/movie/district", {
+        method: "GET",
+        params
+      })
+    },
+     // 语言列表
+     getLanguageList(params: { count?: number }) {
+      return request("/api/user/movie/language", {
+        method: "GET",
+        params
+      })
+    },
   })
 }
 

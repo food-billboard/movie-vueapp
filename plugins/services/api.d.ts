@@ -333,6 +333,61 @@ declare namespace API_CUSTOMER {
     sub: API_USER.IGetMovieCommentData[]
   }
 
+  export interface IGetIssueMovieData {
+    author_description: string 
+    author_rate: number 
+    images: {
+      _id: string
+      src: string 
+    }[]
+    name: string 
+    video: {
+      _id: string 
+      src: string
+    }
+    poster: {
+      _id: string 
+      src: string
+    }
+    _id: string 
+    info: {
+      actor: string[]
+      another_name: string[] 
+      classify: string[]
+      description: string 
+      director: stirng[]
+      district: string[] 
+      language: string[]
+      name: string 
+      screen_time: string 
+    }
+  }
+
+  export interface IPostMovieData {
+    video: {
+      src: string
+      poster: string 
+    }
+    images: string[]
+    info: {
+      name: string 
+      district: string[] 
+      director: string[] 
+      actor: string[] 
+      classify: string[] 
+      screen_time: string 
+      description: string 
+      language: string[] 
+      author_rate: number 
+      another_name: string[] 
+      author_description: string 
+    }
+  }
+
+  export interface IPutMovieData extends IPostMovieData {
+    _id: string 
+  }
+
 }
 
 declare namespace API_MEDIA {

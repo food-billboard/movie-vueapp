@@ -193,6 +193,27 @@ const UserServePlugin: Plugin = (context, inject) => {
         method: "GET",
         params
       })
+    },
+    // 电影详情（修改）
+    getIssueMovieData(params: { id?: string }) {
+      return request("/api/customer/manage/movie/detail", {
+        method: "GET",
+        params
+      })
+    },
+    // 电影发布
+    postMovieData(data: API_CUSTOMER.IPostMovieData) {
+      return request("/api/customer/manage/movie", {
+        method: "POST",
+        data
+      })
+    },
+    // 电影修改
+    putMovieData(data: API_CUSTOMER.IPutMovieData) {
+      return request("/api/customer/manage/movie", {
+        method: "PUT",
+        data
+      })
     }
   })
 }
