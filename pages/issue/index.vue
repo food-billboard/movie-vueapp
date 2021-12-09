@@ -1,7 +1,11 @@
 <template>
   <div class="page-issue">
     <van-form @submit="handleSubmit">
-      <van-field name="poster" label="海报">
+      <van-field 
+        name="poster" 
+        label="海报"
+        :rules="[{ validator: uploadValidator.bind(this, 1, poster), message: '请选择海报' }]"
+      >
         <template #input>
           <chunk-upload
             ref="poster-uploader"
@@ -10,11 +14,16 @@
           />
         </template>
       </van-field>
-      <van-field name="video" label="视频">
+      <van-field 
+        name="video" 
+        label="视频"
+        :rules="[{ validator: uploadValidator.bind(this, 1, video), message: '请选择视频' }]"
+      >
         <template #input>
           <chunk-upload
             ref="video-uploader"
             :max-count="1"
+            accept="video/*"
             @change="onVideoChange"
           />
         </template>
@@ -26,63 +35,194 @@
         placeholder="请输入电影名"
         :rules="[{ required: true, message: '请填写电影名' }]"
       />
-
-      <div style="margin: 16px">
+      <tag-select 
+        v-model="district" 
+        indexes-type="district" 
+        name="district"
+        label="地区"
+      />
+      <tag-select 
+        v-model="director" 
+        indexes-type="director" 
+        name="director"
+        label="导演"
+      />
+      <tag-select 
+        v-model="actor" 
+        indexes-type="actor" 
+        name="actor"
+        label="演员"
+      />
+      <tag-select 
+        v-model="classify" 
+        indexes-type="classify" 
+        name="classify"
+        label="分类"
+      />
+      <tag-select 
+        v-model="language" 
+        indexes-type="language" 
+        name="language"
+        label="语言"
+      />
+      <van-field
+        readonly
+        clickable
+        name="screen_time"
+        :value="screen_time.toString()"
+        label="上映时间"
+        placeholder="点击选择时间"
+        :rules="[{ required: true, message: '请选择上映时间' }]"
+        @click="screen_timePicker = true"
+      />
+      <van-field
+        v-model="description"
+        name="description"
+        label="电影描述"
+        placeholder="电影描述"
+        rows="2"
+        autosize
+        type="textarea"
+        :maxlength="300"
+        :rules="[{ required: true, message: '请填写电影描述' }]"
+      />
+      <van-field
+        v-model="author_description"
+        name="author_description"
+        label="个人电影描述"
+        placeholder="个人电影描述"
+        rows="2"
+        autosize
+        type="textarea"
+        :maxlength="300"
+      />
+      <van-field 
+        name="author_rate" 
+        label="评分"
+      >
+        <template #input>
+          <van-rate v-model="author_rate" count="10" />
+        </template>
+      </van-field>
+      <alias-select 
+        v-model="another_name" 
+      />
+      <van-field 
+        name="images" 
+        label="视频截图"
+        :rules="[{ validator: uploadValidator.bind(this, 6, images), message: '请选择截图' }]"
+      >
+        <template #input>
+          <chunk-upload
+            ref="images-uploader"
+            @change="onImagesChange"
+          />
+        </template>
+      </van-field>
+      <div>
         <van-button round block type="info" native-type="submit"
           >提交</van-button
         >
       </div>
     </van-form>
-    <indexes-select visible data-type="classify" />
+    <van-popup v-model="screen_timePicker" position="bottom">
+      <van-datetime-picker
+        type="date"
+        :min-date="minDate"
+        :max-date="maxDate"
+        @confirm="handleScreenConfirm"
+        @cancel="screen_timePicker = false"
+      />
+    </van-popup>
     <van-overlay :show="loading" @click="loading = false">
       <van-loading type="spinner" />
     </van-overlay>
   </div>
 </template>
 <script>
+import DayJs from 'dayjs'
+import AliasSelect from './components/alias.vue'
+import TagSelect from './components/tag.vue'
 import ChunkUpload from '@/components/ChunkUpload'
-import IndexesSelect from '@/components/IndexSelect'
 import { withTry } from '@/utils'
 export default {
   components: {
-    IndexesSelect,
     ChunkUpload,
+    TagSelect,
+    AliasSelect
   },
   async asyncData({ app, route }) {
     const {
       query: { id },
     } = route
     let value = {}
-    if (id) value = await app.$API_CUSTOMER.getIssueMovieData({ _id: id })
+    if (id) {
+      const { video={}, poster, images, ...nextValue } = await app.$API_CUSTOMER.getIssueMovieData({ _id: id })
+      value = {
+        ...nextValue,
+        video: [
+          {
+            _id: video._id,
+            url: video.src
+          }
+        ],
+        poster: [
+          {
+            _id: poster._id,
+            url: poster.src
+          }
+        ],
+        images: images.map(item => ({
+          _id: item._id,
+          url: item.src 
+        }))
+      }
+    }
     return {
       ...value,
     }
   },
   data() {
     return {
-      video: '',
-      poster: '',
+      video: [],
+      poster: [],
       name: '',
       district: [],
       director: [],
       actor: [],
       classify: [],
-      screen_time: [],
+      screen_time: "",
       language: [],
       description: '',
-      author_rate: 0,
+      author_rate: 10,
       another_name: [],
       author_description: '',
       images: [],
       loading: false,
+      // datepicker
+      screen_timePicker: false,
+      minDate: new Date(1888, 0, 1),
+      maxDate: new Date(),
     }
+  },
+  computed: {
+    screenTimeShow() {
+      if(!this.screen_time) return ""
+      return DayJs(this.screen_time).format("YYYY-MM-DD")
+    }  
   },
   mounted() {
     this.$refs['poster-uploader'].setValue(this.poster)
     this.$refs['video-uploader'].setValue(this.video)
+    this.$refs["images-uploader"].setValue(this.images)
   },
   methods: {
     async handleSubmit() {
+
+      if(this.images.length < 6) {
+        return this.$toast("至少需要6张截图")
+      }
+
       const {
         query: { id },
       } = this.$route
@@ -91,7 +231,7 @@ export default {
         : this.$API_CUSTOMER.postMovieData
       this.loading = true
 
-      const [err] = await withTry(method)({
+      const params = {
         _id: id,
         video: {
           src: this.video,
@@ -111,7 +251,11 @@ export default {
           author_description: this.author_description,
         },
         images: this.images,
-      })
+      }
+      // console.log(params, 222222)
+      // return 
+
+      const [err] = await withTry(method)(params)
       this.loading = false
       if (err) {
         this.$toast('上传失败')
@@ -130,6 +274,16 @@ export default {
     },
     onVideoChange(value) {
       this.video = value
+    },
+    onImagesChange(value) {
+      this.images = value 
+    },
+    handleScreenConfirm(value) {
+      this.screen_time = value
+      this.screen_timePicker = false 
+    },
+    uploadValidator(count, value) {
+      return Array.isArray(value) && value.length >= count 
     },
   },
 }

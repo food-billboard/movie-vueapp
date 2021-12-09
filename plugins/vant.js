@@ -44,7 +44,8 @@ import {
   DropdownMenu,
   DropdownItem,
   SwipeCell,
-  IndexAnchor
+  IndexAnchor,
+  NavBar
 } from 'vant'
 
 export default {
@@ -95,5 +96,6 @@ export default {
     Vue.use(CheckboxGroup)
     Vue.use(SwipeCell)
     Vue.use(IndexAnchor)
+    Vue.use(NavBar)
   }
 }

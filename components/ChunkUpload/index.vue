@@ -29,7 +29,7 @@ export default {
       default: "image/*"
     },
     previewSize: {
-      type: Number || String,
+      type: [Number, String],
       default: 80
     },
     multiple: {
@@ -45,7 +45,7 @@ export default {
       default: false 
     },
     maxSize: {
-      type: Number || String || Function,
+      type: [Number, String , Function],
       default: 1024 * 1024 * 100 
     },
     maxCount: Number,
