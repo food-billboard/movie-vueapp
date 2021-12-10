@@ -22,6 +22,7 @@
 7. 评论列表组件 `/components/CommentItem`  
 8. 视频预览组件 `/components/VideoPreview`  
 暂时只是mock，具体功能还未完成，但是调用方法是固定的  
+9. 索引选择组件  `/components/IndexSelect`  
 
 ## 首页 
 - 路由  
@@ -122,4 +123,9 @@
 ## 我的评论页面
 - 我的评论页面  
 /comment-mine  
+- 是否完成: 是  
+
+## 电影发布页面
+- 电影发布页面  
+/issue  
 - 是否完成: 是  
