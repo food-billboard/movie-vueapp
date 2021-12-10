@@ -53,6 +53,7 @@ export default {
   },
   methods: {
     handleEdit(target) {
+      if(!this.isMine) return 
       const { _id } = target 
       this.$router.push({
         path: "/issue",
