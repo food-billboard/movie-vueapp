@@ -1,25 +1,32 @@
 <template>
-  <van-overlay :show="visible" :lock-scroll="false">
-    <van-nav-bar
-      title="索引选择"
-      left-text="关闭"
-      @click-left="handleClose"
-    />
-    <van-index-bar style="background-color: white">
-      <van-index-anchor
+  <van-popup 
+    :value="visible" 
+    style="width: 100%"
+  >
+    <van-sticky>
+      <van-nav-bar
+        title="索引选择"
+        left-text="关闭"
+        style="z-index: 2"
+        @click-left="handleClose"
+      />
+    </van-sticky>
+    <van-index-bar class="data-index-select" style="height: calc( 100vh - 46px )">
+      <div
         v-for="(item) in dataSource"
         :key="item.key"
-        :index="item.key"
       >
-        <span>{{item.key}}</span>
-        <van-cell v-for="(data) in item" :key="data._id" :title="data.name" >
-          <template #extra>
-            <van-checkbox :value="value.includes(data._id)" @change="handleSelect(item)" />
+        <van-index-anchor
+          :index="item.key"
+        />
+        <van-cell v-for="(data) in item.value" :key="data._id" :title="data.name" >
+          <template #icon>
+            <van-checkbox style="margin-right: 1em" :value="value.includes(data._id)" @click="handleSelect(data)" />
           </template>
         </van-cell>
-      </van-index-anchor>
+      </div>
     </van-index-bar>
-  </van-overlay>
+  </van-popup>
 </template>
 <script>
 export default {
@@ -40,6 +47,12 @@ export default {
       type: Array,
       default() {
         return []
+      }
+    },
+    sourceValue: {
+      type: Array,
+      default() {
+        
       }
     },
     multiple: {
@@ -78,6 +91,12 @@ export default {
     this.fetchData()
   },
   methods: {
+    initSyncData() {
+      if(this.value.length !== this.selected.length && this.dataSource.length > 0) {
+        this.syncSelectValue()
+        this.$emit("change", this.value, this.selected)
+      }
+    },
     formatValue(value) {
       return value.reduce((acc, cur) => {
         const { key } = cur
@@ -106,11 +125,21 @@ export default {
           value: formResult
         })
       }
-      // console.log(this.dataSource, 233333)
+      this.initSyncData()
     },
     syncSelectValue() {
       this.selected = this.value.map(item => {
-        return this.dataSource.find(data => data._id === item)
+        let target  
+        this.dataSource.some(data => {
+          return data.value.some(subValue => {
+            if(subValue._id === item) {
+              target = subValue
+              return true 
+            }
+            return false 
+          })
+        })
+        return target
       }).filter(Boolean)
       return this.selected
     },
@@ -130,8 +159,7 @@ export default {
         }
       }
       this.selected = newSelect
-      this.$emit("change", newValue)
-      this.$emit("sourceChange", newSelect)
+      this.$emit("change", newValue, newSelect)
     },
     handleClose() {
       this.$emit("close")
@@ -139,3 +167,10 @@ export default {
   },
 }
 </script>
+<style lang="less" scoped>
+  .data-index-select {
+    background-color: white;
+    overflow: auto;
+    width: 100%;
+  }
+</style>

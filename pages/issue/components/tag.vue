@@ -20,14 +20,18 @@
         :key="item._id"
         type="primary"
         class="tag-select-content-item"
+        closeable
+        @close="handleClose(item)"
         >{{ item.name }}</van-tag
       >
       <indexes-select
+        ref='indexes-select-ref'
         :visible="indexesVisible"
         :data-type="indexesType"
         :value="value"
+        :source-value="sourceValue"
+        :multiple="multiple"
         @change="handleValueChange"
-        @sourceChange="handleSourceChange"
         @close="indexesVisible = false"
       />
     </div>
@@ -62,6 +66,10 @@ export default {
       type: String,
       default: '',
     },
+    multiple: {
+      type: Boolean,
+      default: true 
+    }
   },
   data() {
     return {
@@ -70,8 +78,9 @@ export default {
     }
   },
   methods: {
-    handleValueChange(value) {
+    handleValueChange(value, sourceValue) {
       this.$emit('change', value)
+      this.handleSourceChange(sourceValue)
     },
     handleSourceChange(value) {
       this.sourceValue = value
@@ -79,6 +88,12 @@ export default {
     indexesValidator() {
       return Array.isArray(this.value) && this.value.length > 0
     },
+    handleClose(value) {
+      const newValue = this.value.filter(item => item !== value._id)
+      const newSourceValue = this.sourceValue.filter(item => item._id !== value._id)
+      this.handleSourceChange(newSourceValue)
+      this.handleValueChange(newValue)
+    }
   },
 }
 </script>

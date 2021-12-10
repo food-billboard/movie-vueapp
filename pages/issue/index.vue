@@ -64,12 +64,13 @@
         indexes-type="language" 
         name="language"
         label="语言"
+        :multiple="false"
       />
       <van-field
         readonly
         clickable
         name="screen_time"
-        :value="screen_time.toString()"
+        :value="screenTimeShow"
         label="上映时间"
         placeholder="点击选择时间"
         :rules="[{ required: true, message: '请选择上映时间' }]"
@@ -115,6 +116,7 @@
         <template #input>
           <chunk-upload
             ref="images-uploader"
+            :multiple="true"
             @change="onImagesChange"
           />
         </template>
@@ -135,7 +137,9 @@
       />
     </van-popup>
     <van-overlay :show="loading" @click="loading = false">
-      <van-loading type="spinner" />
+      <over-loading :loading="true">
+        提交中...
+      </over-loading>
     </van-overlay>
   </div>
 </template>
@@ -144,12 +148,14 @@ import DayJs from 'dayjs'
 import AliasSelect from './components/alias.vue'
 import TagSelect from './components/tag.vue'
 import ChunkUpload from '@/components/ChunkUpload'
+import OverLoading from '@/components/Loading'
 import { withTry } from '@/utils'
 export default {
   components: {
     ChunkUpload,
     TagSelect,
-    AliasSelect
+    AliasSelect,
+    OverLoading
   },
   async asyncData({ app, route }) {
     const {
@@ -157,13 +163,21 @@ export default {
     } = route
     let value = {}
     if (id) {
-      const { video={}, poster, images, ...nextValue } = await app.$API_CUSTOMER.getIssueMovieData({ _id: id })
+      const { video={}, poster, images, info, ...nextValue } = await app.$API_CUSTOMER.getIssueMovieData({ _id: id })
       value = {
         ...nextValue,
+        actor: info.actor,
+        director: info.director,
+        district: info.district,
+        language: info.language,
+        classify: info.classify,
+        description: info.description,
+        another_name: info.another_name,
+        screen_time: info.screen_time,
         video: [
           {
             _id: video._id,
-            url: video.src
+            url: poster.src
           }
         ],
         poster: [
@@ -207,8 +221,7 @@ export default {
   },
   computed: {
     screenTimeShow() {
-      if(!this.screen_time) return ""
-      return DayJs(this.screen_time).format("YYYY-MM-DD")
+      return this.formatDate(this.screen_time)
     }  
   },
   mounted() {
@@ -217,6 +230,10 @@ export default {
     this.$refs["images-uploader"].setValue(this.images)
   },
   methods: {
+    formatDate(date) {
+      if(!date) return ""
+      return DayJs(date).format("YYYY-MM-DD")
+    },
     async handleSubmit() {
 
       if(this.images.length < 6) {
@@ -234,8 +251,8 @@ export default {
       const params = {
         _id: id,
         video: {
-          src: this.video,
-          poster: this.poster,
+          src: (this.video[0] || {})._id,
+          poster: (this.poster[0] || {})._id,
         },
         info: {
           name: this.name,
@@ -243,17 +260,15 @@ export default {
           director: this.director,
           actor: this.actor,
           classify: this.classify,
-          screen_time: this.screen_time,
+          screen_time: this.formatDate(this.screen_time),
           language: this.language,
           description: this.description,
           author_rate: this.author_rate,
           another_name: this.another_name,
           author_description: this.author_description,
         },
-        images: this.images,
+        images: this.images.map(item => item._id),
       }
-      // console.log(params, 222222)
-      // return 
 
       const [err] = await withTry(method)(params)
       this.loading = false
