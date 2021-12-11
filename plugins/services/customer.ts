@@ -221,6 +221,13 @@ const UserServePlugin: Plugin = (context, inject) => {
         method: "GET",
         params
       })
+    },
+    // 评分
+    putMovieRate(data: { _id: string, value: number }) {
+      return request("/api/customer/movie/detail/rate", {
+        method: "PUT",
+        data
+      })
     }
   })
 }

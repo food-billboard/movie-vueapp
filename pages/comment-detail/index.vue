@@ -53,7 +53,7 @@ export default {
     async handleClick() {
       await this.$refs["loading-list"].onRefresh()
     },
-        handleComment() {
+    handleComment() {
       this.$router.push({
         path: "comment",
         query: {

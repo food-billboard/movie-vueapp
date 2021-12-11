@@ -45,7 +45,8 @@ import {
   DropdownItem,
   SwipeCell,
   IndexAnchor,
-  NavBar
+  NavBar,
+  Popover
 } from 'vant'
 
 export default {
@@ -97,5 +98,6 @@ export default {
     Vue.use(SwipeCell)
     Vue.use(IndexAnchor)
     Vue.use(NavBar)
+    Vue.use(Popover)
   }
 }

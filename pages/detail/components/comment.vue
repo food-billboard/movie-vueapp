@@ -7,12 +7,22 @@
         :key="item._id"
         class="detail-comment-list-content-item"
       >
-        <van-image  
-          width="100%"
-          height="100%"
-          round
-          :src="item.user_info.avatar"
-        />
+        <van-popover
+          v-model="item.show"
+          trigger="click"
+          theme="dark"
+          placement="top"
+        >
+          <div class="detail-comment-list-content-item-text" @click="handleToComment">{{item.content.text}}</div>
+          <template #reference>
+            <van-image  
+              width="100%"
+              height="100%"
+              round
+              :src="item.user_info.avatar"
+            />
+          </template>
+        </van-popover>
       </div>
     </div>
   </div>
@@ -35,22 +45,42 @@ export default {
     return {
       showPopover: false 
     }
+  },
+  methods: {
+    handleToComment() {
+      this.$router.push({
+        path: "/comment-list",
+        query: {
+          id: this.id 
+        }
+      })
+    }
   }
 }
 </script>
 <style lang="less" scoped>
+  @import url("/assets/global.less");
   .detail-comment-list {
     width: 100vw;
-    &-title {
+    &-title.sub-title {
       text-shadow: none;
       background-color: transparent;
+      text-indent: @normal-padding;
     }
     &-content {
       width: 100%;
       overflow-x: auto;
       &-item {
-        width: 20vw;
-        height: 20vw;
+        width: 15vw;
+        height: 15vw;
+        display: inline-block;
+        &-text {
+          padding: @normal-padding / 2;
+          box-sizing: border-box;
+          font-size: @normal-font-size;
+          max-width: 15vw;
+          word-break: break-all;
+        }
       }
     }
   }

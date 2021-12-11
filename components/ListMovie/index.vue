@@ -11,7 +11,7 @@
         @click="handleGetDetail"
       >
         <div class="movie-list-item-info-title">{{value.name || "-"}}</div>
-        <van-rate v-model="rate" :size="15" readonly />
+        <van-rate :value="rate" :size="10" count="10" readonly />
         <color-div type="secondary" class="movie-list-item-info-sub-title">{{value.public_time}}</color-div>
         <color-div type="secondary" class="movie-list-item-info-sub-title">
           {{value.hot}}
@@ -66,7 +66,7 @@ export default {
   },
   computed: {
     rate() {
-      return this.value.rate || 0
+      return parseInt(this.value.rate) || 0
     },
     storeName() {
       return this.isStore ? "star" : "star-o"

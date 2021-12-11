@@ -40,9 +40,11 @@ export default {
   .detail-tag-list {
     width: 100vw;
     padding-left: @normal-padding;
+    box-sizing: border-box;
     &-title {
       text-shadow: none;
       background-color: transparent;
+      display: block;
     }
     &-item {
       margin-right: @normal-padding;

@@ -1,6 +1,8 @@
 import Vue  from 'vue'
 import VideoPreview from './index.vue'
 
+// videos [ { src, poster } ]
+
 const VideoPreviewConstructor = Vue.extend(VideoPreview)
 
 const VideoPreviewModal = (config) => {
