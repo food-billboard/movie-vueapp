@@ -213,6 +213,13 @@ const UserServePlugin: Plugin = (context, inject) => {
         params
       })
     },
+    // 专题列表
+    getSpecialList(params: API_USER.IGetAttentionsParams) {
+      return request("/api/user/home/special", {
+        method: "GET",
+        params
+      })
+    }
   })
 }
 

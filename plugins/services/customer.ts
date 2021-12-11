@@ -214,6 +214,13 @@ const UserServePlugin: Plugin = (context, inject) => {
         method: "PUT",
         data
       })
+    },
+    // 专题列表
+    getSpecialList(params: API_USER.IGetAttentionsParams) {
+      return request("/api/customer/movie/detail/special", {
+        method: "GET",
+        params
+      })
     }
   })
 }
