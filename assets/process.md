@@ -21,8 +21,8 @@
 6. 用户列表组件 `/components/UserItem`  
 7. 评论列表组件 `/components/CommentItem`  
 8. 视频预览组件 `/components/VideoPreview`  
-暂时只是mock，具体功能还未完成，但是调用方法是固定的  
 9. 索引选择组件  `/components/IndexSelect`  
+10. 视频组件  `/components/Video`  
 
 ## 首页 
 - 路由  
@@ -133,4 +133,9 @@
 ## 专题列表  
 - 电影专题列表页面  
 /special   
+- 是否完成: 是  
+
+## 电影详情  
+- 电影详情页面  
+/detail  
 - 是否完成: 是  
