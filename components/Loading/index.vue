@@ -1,6 +1,8 @@
 <template>
   <div v-if="loading" class="loading-class">
-    <van-loading class="loading-class-item" type="spinner" />
+    <van-loading class="loading-class-item" type="spinner" >
+      <slot></slot>
+    </van-loading>
   </div>
 </template>
 <script>

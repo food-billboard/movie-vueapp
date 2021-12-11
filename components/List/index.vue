@@ -4,6 +4,7 @@
       v-model="loading"
       :finished="finished"
       :error.sync="error"
+      error-text="请求失败，点击重新加载"
       :immediate-check="immediateCheck"
       finished-text="没有更多了"
       @load="onLoad"
@@ -69,7 +70,8 @@ export default {
         ...params
       })
       this.error = !!err
-      this.finished = !value.length || value.length < this.pageSize
+      if(this.error) this.loading = false 
+      this.finished = !this.error && !!value && (!value.length || value.length < this.pageSize)
       this.internalCurrPage += 1
     }
   }

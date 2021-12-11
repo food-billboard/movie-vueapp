@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="page-feedback">
     <comment
       @submit="handleSubmit"
     >
@@ -35,3 +35,9 @@ export default {
   }
 }
 </script>
+<style lang="less" scoped>
+  .page-feedback {
+    width: 100%;
+    min-height: 100vh;
+  }
+</style>

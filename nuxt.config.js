@@ -50,6 +50,7 @@ export default {
     },
     '@/plugins/swiper',
     '@/plugins/isLogin',
+    '@/plugins/number',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components

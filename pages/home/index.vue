@@ -47,16 +47,7 @@ export default {
 
     // 返回内容会被保存data
     return {
-      swiperList: [
-        {
-          src: "https://images.pexels.com/photos/9577102/pexels-photo-9577102.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-          id: "https://images.pexels.com/photos/9577102/pexels-photo-9577102.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-        },
-        {
-          src: "https://images.pexels.com/photos/10013232/pexels-photo-10013232.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500",
-          id: "https://images.pexels.com/photos/10013232/pexels-photo-10013232.jpeg?auto=compress&cs=tinysrgb&dpr=1&w=500"
-        }
-      ] || swiperData.map(item => {
+      swiperList: swiperData.map(item => {
         return {
           ...item,
           src: item.poster,

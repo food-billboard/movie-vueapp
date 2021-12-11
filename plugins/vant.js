@@ -43,6 +43,9 @@ import {
   Dialog,
   DropdownMenu,
   DropdownItem,
+  SwipeCell,
+  IndexAnchor,
+  NavBar
 } from 'vant'
 
 export default {
@@ -91,5 +94,8 @@ export default {
     Vue.use(DropdownItem)
     Vue.use(DropdownMenu)
     Vue.use(CheckboxGroup)
+    Vue.use(SwipeCell)
+    Vue.use(IndexAnchor)
+    Vue.use(NavBar)
   }
 }

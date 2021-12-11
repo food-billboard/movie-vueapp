@@ -128,6 +128,104 @@ const UserServePlugin: Plugin = (context, inject) => {
         method: "GET",
         params 
       })
+    },
+    // 用户关注
+    getAttentions(params: API_USER.IGetAttentionsParams) {
+      return request("/api/user/customer/attention", {
+        method: "GET",
+        params
+      })
+    },
+    // 用户粉丝
+    getFans(params: API_USER.IGetAttentionsParams) {
+      return request("/api/user/customer/fans", {
+        method: "GET",
+        params
+      })
+    },
+    // 用户浏览
+    getBrowserList(params: API_USER.IGetAttentionsParams) {
+      return request("/api/user/customer/browser", {
+        method: "GET",
+        params
+      })
+    },
+    // 用户收藏
+    getStoreList(params: API_USER.IGetAttentionsParams) {
+      return request("/api/user/customer/store", {
+        method: "GET",
+        params
+      })
+    },
+    // 用户发布
+    getIssueList(params: API_USER.IGetAttentionsParams) {
+      return request("/api/user/customer/movie", {
+        method: "GET",
+        params
+      })
+    },
+    // 用户信息
+    getUserInfo(params: { _id: string }) {
+      return request("/api/user/customer", {
+        method: "GET",
+        params
+      })
+    },
+    // 电影详情 简易
+    getMovieDetailSimple(params: { _id: string }) {
+      return request("/api/user/movie/detail/simple", {
+        method: "GET",
+        params
+      })
+    },
+    // 电影评论
+    getMovieComment(params: API_USER.IGetAttentionsParams) {
+      return request("/api/user/movie/detail/comment/list", {
+        method: "GET",
+        params
+      })
+    },
+    // 评论详情
+    getCommentDetail(params: API_USER.IGetAttentionsParams) {
+      return request("/api/user/movie/detail/comment/detail", {
+        method: "GET",
+        params
+      })
+    },
+    // 演员列表
+    getActorList(params: { count?: number }) {
+      return request("/api/user/movie/actor", {
+        method: "GET",
+        params
+      })
+    },
+     // 导演列表
+     getDirectorList(params: { count?: number }) {
+      return request("/api/user/movie/director", {
+        method: "GET",
+        params
+      })
+    },
+     // 地区列表
+     getDistrictList(params: { count?: number }) {
+      return request("/api/user/movie/district", {
+        method: "GET",
+        params
+      })
+    },
+     // 语言列表
+     getLanguageList(params: { count?: number }) {
+      return request("/api/user/movie/language", {
+        method: "GET",
+        params
+      })
+    },
+    // 专题列表
+    getSpecialList(params: API_USER.IGetAttentionsParams) {
+      return request("/api/user/home/special", {
+        method: "GET",
+        params
+      })
     }
   })
 }

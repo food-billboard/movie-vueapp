@@ -98,6 +98,30 @@ declare namespace API_USER {
       screen_time: string 
     }
   }
+  export interface IGetAttentionsParams {
+    _id: string 
+    currPage?: number 
+    pageSize?: number 
+  }
+
+  export interface IGetAttentionData {
+    _id: string 
+    username: string
+    description: string 
+    avatar: string 
+  }
+
+  export interface IGetBrowserListData {
+    description: string 
+    name: string
+    poster: string 
+    _id: string 
+    store: boolean 
+    rate: number 
+    classify: { name: string }[]
+    publish_time: string 
+    hot: number 
+  }
 
   export interface IGetSearchListData {
     _id: string 
@@ -198,6 +222,57 @@ declare namespace API_USER {
     type: "forget" | "register"
   }
 
+  export interface IGetAnotherUserInfo {
+    _id: string 
+    hot: number 
+    attentions: number 
+    avatar: string 
+    description: string 
+    fans: number 
+    username: string 
+    createdAt: string 
+    updatedAt: string 
+    like: boolean 
+  }
+
+  export interface IGetMovieDetailSimple {
+    description: string 
+    name: string 
+    poster: string 
+    _id: string 
+  }
+
+  export interface IGetMovieCommentData {
+    comment_users: {
+      avatar: string 
+      username: string
+      _id: string 
+    }[]
+    content: {
+      images: string[]
+      video: {
+        src: string 
+        poster: string 
+      }[]
+      text: string 
+    }
+    createdAt: string
+    updatedAt: string 
+    like: boolean 
+    total_like: number 
+    _id: string 
+    user_info: {
+      _id: string 
+      avatar: string 
+      username: string 
+    }
+  }
+
+  export interface IGetCommentDetailData {
+    comment: IGetMovieCommentData,
+    sub: IGetMovieCommentData[]
+  }
+
 }
 
 declare namespace API_UPLOAD {
@@ -271,6 +346,13 @@ declare namespace API_UPLOAD {
 
 declare namespace API_CUSTOMER {
 
+  export interface IGetCustomerUserInfo extends Omit<API_USER.IGetAnotherUserInfo, "like"> {
+    friend_id: string 
+    friends: number 
+    mobile: number
+    email: string 
+  }
+
   export interface IGetMovieDetailParams {
     _id: string 
   }
@@ -287,6 +369,91 @@ declare namespace API_CUSTOMER {
     }
   }
 
+  export interface IGetSelfAttentionParams {
+    currPage?: number 
+    pageSize?: number 
+  }
+
+  export interface IGetSelfAttentionData {
+    _id: string 
+    username: string
+    description: string 
+    avatar: string 
+  }
+
+  export interface IGetSelfBrowserListData extends API_USER.IGetBrowserListData {}
+
+  export interface IGetBrowserListData extends API_USER.IGetBrowserListData {}
+
+  export interface IPostCommentParams {
+    _id: string 
+    content: {
+      image: string[]
+      video: string[]
+      text: string 
+    }
+  }
+
+  export interface IGetCommentDetailData {
+    comment: API_USER.IGetMovieCommentData,
+    sub: API_USER.IGetMovieCommentData[]
+  }
+
+  export interface IGetIssueMovieData {
+    author_description: string 
+    author_rate: number 
+    images: {
+      _id: string
+      src: string 
+    }[]
+    name: string 
+    video: {
+      _id: string 
+      src: string
+    }
+    poster: {
+      _id: string 
+      src: string
+    }
+    _id: string 
+    info: {
+      actor: string[]
+      another_name: string[] 
+      classify: string[]
+      description: string 
+      director: stirng[]
+      district: string[] 
+      language: string[]
+      name: string 
+      screen_time: string 
+    }
+  }
+
+  export interface IPostMovieData {
+    video: {
+      src: string
+      poster: string 
+    }
+    images: string[]
+    info: {
+      name: string 
+      district: string[] 
+      director: string[] 
+      actor: string[] 
+      classify: string[] 
+      screen_time: string 
+      description: string 
+      language: string[] 
+      author_rate: number 
+      another_name: string[] 
+      author_description: string 
+    }
+  }
+
+  export interface IPutMovieData extends IPostMovieData {
+    _id: string 
+  }
+
 }
 
 declare namespace API_MEDIA {
@@ -301,3 +468,4 @@ declare namespace API_MEDIA {
   }
 
 }
+

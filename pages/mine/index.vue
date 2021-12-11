@@ -2,7 +2,7 @@
   <div
     class="main-page"
   >
-    <mine-header />
+    <mine-header :value="value" />
     <mine-info />
   </div>
 </template>
@@ -15,7 +15,11 @@ export default {
     MineInfo
   },
   layout: "homeLayout",
-
+  computed: {
+    value() {
+      return this.$store.state.user.userInfo || {}
+    },
+  }
 }
 </script>
 <style lang="less" scoped>

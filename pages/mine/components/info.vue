@@ -74,12 +74,15 @@ export default {
         {
           title: "收藏",
           icon: "star",
-          router: "/store"
+          router: "/store",
+          query: {
+            isMine: true 
+          }
         },
         {
           title: "发布",
           icon: "share",
-          router: "/issue"
+          router: "/issue",
         }
       ]
     },
@@ -88,7 +91,10 @@ export default {
         {
           title: "关注",
           icon: "like",
-          router: "/attentions"
+          router: "/attentions",
+          query: {
+            isMine: true,
+          }
         },
         {
           title: "Wo的评论",
@@ -98,12 +104,18 @@ export default {
         {
           title: "浏览记录",
           icon: "todo-list",
-          router: "/browser"
+          router: "/browser",
+          query: {
+            isMine: true 
+          }
         },
         {
           title: "粉丝",
           icon: "friends",
-          router: "/fans"
+          router: "/fans",
+          query: {
+            isMine: true,
+          }
         },
       ]
     },
@@ -114,7 +126,7 @@ export default {
           icon: "coupon",
           router: "/issue-list",
           query: {
-            id: this.value._id 
+            isMine: true 
           }
         },
         {

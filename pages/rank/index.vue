@@ -12,12 +12,12 @@
       ref="loading-list"
       class="rank-list"
       :fetch-data="fetchData"
-      :refresh="handleClick.bind(this, currentRank)"
     >
       <list-item
         v-for="item in rankList"
         :key="item.id"
         :value="item"
+        @refresh="handleClick.bind(this, currentRank)"
       />
     </loading-list>
   </div>
@@ -52,15 +52,6 @@
       }
     },
     methods: {
-      handleGetDetail(target) {
-        const { _id } = target 
-        this.$router.push({
-          path: "/detail",
-          query: {
-            id: _id 
-          }
-        })
-      },
       async handleClick(target) {
         const { _id } = target
         this.currentRank = _id 

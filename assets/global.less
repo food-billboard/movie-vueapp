@@ -37,6 +37,12 @@ body {
   text-overflow: ellipsis;
   overflow: hidden;
 }
+.multi-ellipsis(@line) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: @line;
+  overflow: hidden;
+}
 
 .sub-title {
   font-size: @sub-title-font-size;

@@ -8,12 +8,12 @@
     <loading-list
       ref="loading-list"
       :fetch-data="fetchData"
-      :refresh="handleClick.bind(this, currentClassify)"
     >
       <list-item
         v-for="item in classify"
         :key="item.id"
         :value="item"
+        @refresh="handleClick.bind(this, currentClassify)"
       />
     </loading-list>
   </div>
@@ -46,15 +46,6 @@
       }
     },
     methods: {
-      handleGetDetail(target) {
-        const { _id } = target 
-        this.$router.push({
-          path: "/detail",
-          query: {
-            id: _id 
-          }
-        })
-      },
       async handleClick(target) {
         const { _id } = target
         this.currentClassify = _id 

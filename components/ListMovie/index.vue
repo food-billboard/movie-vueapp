@@ -26,6 +26,7 @@
           收藏
           <van-icon :name="storeName" :color="storeColor" />
         </div>
+        <slot name="action"></slot>
       </div>
     </div>
     <div :class="['movie-list-item-description ellipsis', 'background-color', 'disabled']">
@@ -100,12 +101,16 @@ export default {
         if(err) {
           this.$toast("出问题了")
         }
-        this.refresh()
+        this.$emit("refresh")
       }
 
     },
     async fetchStore() {
-      const { _id } = this.value 
+      const { _id, store } = this.value 
+      if(typeof store !== "undefined") {
+        this.isStore = store 
+        return 
+      }
       const data = await this.$API_CUSTOMER.getMovieDetail({
         _id
       })
@@ -150,6 +155,8 @@ export default {
       display: flex;
       align-items: center;
       margin: @normal-margin / 2 0;
+      flex-direction: column;
+      justify-content: space-evenly;
       &-item {
         font-size: @sub-title-font-size;
       }

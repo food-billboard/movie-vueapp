@@ -100,7 +100,10 @@ export function upload(instance: Upload, file: File, onChange: Function, fileLis
         }
         generateVideoPoster(config, putVideoPoster)
         .then((data) => {
-          if(data) config.url = data 
+          if(data) {
+            config.url = data
+            config.isImage = true 
+          } 
           onChange(config)
         })
         .catch(() => {
