@@ -16,8 +16,12 @@
         placeholder="请输入密码"
         :rules="[{ required: true, message: '请输入密码' }]"
       />
-      <div style="margin: 16px;">
+      <div class="login-form-action">
         <van-button round block type="info" native-type="submit">提交</van-button>
+        <div class="login-form-action-sub">
+          <nuxt-link class="login-form-action-register" to="/register" >注册</nuxt-link>
+          <nuxt-link class="login-form-action-forget" to="/forget">忘记密码</nuxt-link>
+        </div>
       </div>
       <loading :loading="loading" />
     </van-form>
@@ -44,13 +48,28 @@
           password: this.password
         })
         this.loading = false 
-      }
+      },
     }
   }
 </script>
 <style lang="less" scoped>
+  @import url("/assets/global.less");
   .login-form {
     height: 100vh;
+    &-action {
+      margin-top: @normal-margin;
+      &-sub {
+        width: 100%;
+        padding: 0 @normal-padding / 2;
+        margin-top: @normal-margin/ 4;
+        display: flex;
+        justify-content: space-between;
+        box-sizing: border-box;
+        & span {
+          font-size: @sub-title-font-size !important;
+        }
+      }
+    }
   }
 </style>
 
