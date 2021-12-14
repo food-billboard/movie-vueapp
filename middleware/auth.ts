@@ -7,7 +7,21 @@ export const HOME_MENU = [
 
 const WHITE_LIST: string[] = [
   "/home",
-
+  "/classify",
+  "/rank",
+  "/search",
+  "/attentions",
+  "/fans",
+  "/browser",
+  "/store",
+  "/issue-list",
+  "/user",
+  "/comment-list",
+  "/comment-detail",
+  "/special",
+  "/detail",
+  "/register",
+  "/forget",
 ]
 
 function pathWhiteValidator(path: string) {
@@ -55,6 +69,8 @@ export default async function (context: any) {
   const pending = app.router.history.pending
   const { path } = current 
 
+  const toValidPath = pending ? pending.path : path 
+
   if (!err) {
     if(path.includes("login") && !pending) {
       redirect({
@@ -78,9 +94,10 @@ export default async function (context: any) {
     //     }
     //   }
     // })
-  }else if(!pending || (!pending.path.includes("login") && !pathWhiteValidator(pending.path))) {
+  }else if(!toValidPath.includes("login") && !pathWhiteValidator(toValidPath)) {
     redirect({
       path: "/login",
     })
   }
+  
 }

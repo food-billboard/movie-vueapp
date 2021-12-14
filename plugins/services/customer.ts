@@ -7,7 +7,9 @@ const UserServePlugin: Plugin = (context, inject) => {
 
   inject("API_CUSTOMER", {
     async getUserInfo() {
-      const result = await request("/api/customer/manage")
+      const result = await request("/api/customer/manage", {
+        mis: false 
+      })
       store.commit("user/fetchUserInfo", result || {})
       return result 
     },
