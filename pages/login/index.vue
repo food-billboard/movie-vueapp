@@ -65,7 +65,7 @@
         display: flex;
         justify-content: space-between;
         box-sizing: border-box;
-        & span {
+        & a {
           font-size: @sub-title-font-size !important;
         }
       }
