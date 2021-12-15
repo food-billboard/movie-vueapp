@@ -25,9 +25,9 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           host: ${{ secrets.SSH_HOST }}
           script: |
-            rm -rf ${{REMOTE_PATH}}-prev
+            rm -rf ${{TEMP_REMOTE_PATH}}
             mkdir -p ${{REMOTE_PATH}}
-            mv ${{REMOTE_PATH}} ${{REMOTE_PATH}}-prev
+            mv ${{REMOTE_PATH}} ${{TEMP_REMOTE_PATH}}
             npm i pm2 -g
             npm i yarn -g
 
