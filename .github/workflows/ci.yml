@@ -25,9 +25,9 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           host: ${{ secrets.SSH_HOST }}
           script: |
-            rm -rf ${{TEMP_REMOTE_PATH}}
-            mkdir -p ${{REMOTE_PATH}}
-            mv ${{REMOTE_PATH}} ${{TEMP_REMOTE_PATH}}
+            rm -rf ${{secrets.TEMP_REMOTE_PATH}}
+            mkdir -p ${{secrets.REMOTE_PATH}}
+            mv ${{secrets.REMOTE_PATH}} ${{secrets.TEMP_REMOTE_PATH}}
             npm i pm2 -g
             npm i yarn -g
 
@@ -37,7 +37,7 @@ jobs:
         uses: garygrossgarten/github-action-scp@release
         with:
           local: "./dist/"
-          remote: ${{REMOTE_PATH}}/dist
+          remote: ${{secrets.REMOTE_PATH}}/dist
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
@@ -46,7 +46,7 @@ jobs:
         uses: garygrossgarten/github-action-scp@release
         with:
           local: "./.nuxt/"
-          remote: ${{REMOTE_PATH}}/.nuxt
+          remote: ${{ secrets.REMOTE_PATH }}/.nuxt
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
@@ -55,7 +55,7 @@ jobs:
         uses: garygrossgarten/github-action-scp@release
         with:
           local: "./package.json"
-          remote: ${{REMOTE_PATH}}/package.json
+          remote: ${{ secrets.REMOTE_PATH }}/package.json
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
@@ -64,7 +64,7 @@ jobs:
         uses: garygrossgarten/github-action-scp@release
         with:
           local: "./nuxt.config.js"
-          remote: ${{REMOTE_PATH}}/nuxt.config.js
+          remote: ${{ secrets.REMOTE_PATH }}/nuxt.config.js
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
@@ -76,8 +76,8 @@ jobs:
           password: ${{ secrets.SSH_PASSWORD }}
           host: ${{ secrets.SSH_HOST }}
           script: |
-            cd ${{REMOTE_PATH}}
+            cd ${{ secrets.REMOTE_PATH }}
             yarn -production
-            pm2 start ${{REMOTE_PATH}}/node_modules/nuxt/bin/nuxt.js --name movie-vueapp
+            pm2 start ${{ secrets.REMOTE_PATH }}/node_modules/nuxt/bin/nuxt.js --name movie-vueapp
 
            
