@@ -69,6 +69,15 @@ jobs:
           host: ${{ secrets.SSH_HOST }}
           username: ${{ secrets.SSH_USERNAME }}
           password: ${{ secrets.SSH_PASSWORD }}
+      # pm2.config.js
+      - name: Deploy pm2.config.js 🍱
+        uses: garygrossgarten/github-action-scp@release
+        with:
+          local: "./pm2.config.js"
+          remote: ${{ secrets.REMOTE_PATH }}/pm2.config.js
+          host: ${{ secrets.SSH_HOST }}
+          username: ${{ secrets.SSH_USERNAME }}
+          password: ${{ secrets.SSH_PASSWORD }}
 
       - name: start server 🚀 
         uses: appleboy/ssh-action@master
@@ -79,6 +88,5 @@ jobs:
           script: |
             cd ${{ secrets.REMOTE_PATH }}
             yarn -production
-            pm2 start ${{ secrets.REMOTE_PATH }}/node_modules/nuxt/bin/nuxt.js --name movie-vueapp
-
+            pm2 startOrRestart pm2.config.js
            
