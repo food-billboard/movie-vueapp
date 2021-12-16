@@ -145,6 +145,7 @@ export default {
     baseUrl: process.env.NODE_ENV === 'production' ? 'http://47.97.27.23' : 'http://47.97.27.23'
   },
   router: {
+    base: process.env.NODE_ENV === "production" ? "/api/backend/movie5/" : "",
     middleware: ['auth']
   }
 }
