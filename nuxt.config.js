@@ -3,6 +3,8 @@ import path from 'path'
 const resolve = (dir) => path.join(__dirname, dir)
 
 export default {
+  rootDir: process.cwd(),
+  buildDir: process.cwd() + '/.nuxt/',
   // Global page headers: https://go.nuxtjs.dev/config-head
   head: {
     title: 'movie-vueapp',
@@ -26,31 +28,31 @@ export default {
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
     'vant/lib/index.css',
-    '@/assets/global.less',
+    '~/assets/global.less',
   ],
 
   styleResources: {
     less: [
-      './assets/variable.less'
+      '~/assets/variable.less'
     ]
   },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
     {
-      src: "@/plugins/lib-flexible",
+      src: "~plugins/lib-flexible",
       ssr: false 
     },
-    "@/plugins/services",
+    "~plugins/services",
     // '@/plugins/axios',
-    '@/plugins/components',
+    '~plugins/components',
     {
-      src: "@/plugins/upload",
+      src: "~plugins/upload",
       ssr: false 
     },
-    '@/plugins/swiper',
-    '@/plugins/isLogin',
-    '@/plugins/number',
+    '~plugins/swiper',
+    '~plugins/isLogin',
+    '~plugins/number',
   ],
 
   // Auto import components: https://go.nuxtjs.dev/config-components
@@ -69,8 +71,8 @@ export default {
     // https://go.nuxtjs.dev/axios
     '@nuxtjs/axios',
     'cookie-universal-nuxt',
-    'nuxt-vuex-localstorage'
-    // "@nuxtjs/proxy"
+    'nuxt-vuex-localstorage',
+    "@nuxtjs/proxy"
   ],
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
@@ -127,7 +129,7 @@ export default {
             hack: `
               true; 
               @import "${resolve(
-                "./assets/variable.less"
+                "~/assets/variable.less"
               )}";
             `
           }
@@ -136,11 +138,11 @@ export default {
     },
   },
   server: {
-    port: 8000,
+    port: 4002,
     host: '127.0.0.1'
   },
   env: {
-    baseUrl: process.env.NODE_ENV === 'production' ? 'http://127.0.0.1:4000' : 'http://47.97.27.23'
+    baseUrl: process.env.NODE_ENV === 'production' ? 'http://47.97.27.23' : 'http://47.97.27.23'
   },
   router: {
     middleware: ['auth']

@@ -88,5 +88,5 @@ jobs:
           script: |
             cd ${{ secrets.REMOTE_PATH }}
             yarn -production
-            pm2 startOrRestart pm2.config.js
+            yarn start:production
            
