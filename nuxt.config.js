@@ -139,7 +139,7 @@ export default {
   },
   server: {
     port: 4002,
-    host: '127.0.0.1'
+    host: '0.0.0.0'
   },
   env: {
     baseUrl: process.env.NODE_ENV === 'production' ? 'http://47.97.27.23' : 'http://47.97.27.23'
