@@ -77,10 +77,24 @@ export default {
 
   // Axios module configuration: https://go.nuxtjs.dev/config-axios
   axios: {
-    prefix: '/',
+    proxy: true,
     withCredentials: true,
     timeout: 30000,
     baseURL: process.env.baseUrl,
+  },
+  proxy:  {
+    '/api/user': {
+      target: 'http://47.97.27.23',
+      changeOrigin: true, // 表示是否跨域
+    },
+    '/api/customer': {
+      target: 'http://47.97.27.23',
+      changeOrigin: true, // 表示是否跨域
+    },
+    '/api/media': {
+      target: 'http://47.97.27.23',
+      changeOrigin: true, // 表示是否跨域
+    }
   },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
